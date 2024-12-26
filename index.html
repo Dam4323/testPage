@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Portfolio Interactif</title>
+    <meta name="description" content="Portfolio de Julie Martin - BTS SIO SISR">
+    <meta name="author" content="Julie Martin">
+
+    <!-- Intégration des bibliothèques CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+    <style>
+        body {
+            padding-top: 4.5rem;
+            background-color: #f0f2f5;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .section {
+            padding: 60px 0;
+        }
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        .footer {
+            background-color: #343a40;
+            color: #ffffff;
+            padding: 20px 0;
+            text-align: center;
+        }
+        .footer a {
+            color: #ffc107;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        .card-project {
+            transition: transform 0.3s;
+        }
+        .card-project:hover {
+            transform: scale(1.05);
+        }
+        .animated-icon {
+            font-size: 2rem;
+            margin-right: 10px;
+            color: #0d6efd;
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #888; 
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555; 
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Portfolio de Julie Martin</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Basculer la navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#presentation-personnelle">Présentation</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#presentation-du-bts">Le BTS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#projets-realises">Projets</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#stages-effectues">Stages</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#veille-technologique">Veille</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Fin Navigation -->
+
+    <!-- Présentation Personnelle -->
+    <section id="presentation-personnelle" class="section bg-white">
+        <div class="container animate__animated animate__fadeIn">
+            <h2 class="mb-4">Présentation Personnelle</h2>
+            <div class="row">
+                <div class="col-md-4 text-center">
+                    <img src="https://via.placeholder.com/200" class="rounded-circle img-fluid" alt="Photo de Julie Martin">
+                </div>
+                <div class="col-md-8">
+                    <p>
+                        Bonjour ! Je m'appelle <strong>Julie Martin</strong> et je suis étudiante en <strong>BTS SIO</strong>, option <strong>SISR</strong>.
+                        Passionnée par les technologies de l'information, je me spécialise dans l'administration des réseaux, des systèmes et la sécurité informatique.
+                    </p>
+                    <ul class="list-unstyled">
+                        <li>🎓 <strong>Formation :</strong> BTS SIO (Services Informatiques aux Organisations), option SISR.</li>
+                        <li>💻 <strong>Spécialisation :</strong> Administration réseaux, systèmes et sécurité.</li>
+                        <li>🌱 <strong>Compétences :</strong> Développement, déploiement et méthodologie de projets.</li>
+                        <li>🌍 <strong>Langues :</strong> Français (natif), Anglais (courant).</li>
+                        <li>🎨 <strong>Hobbies :</strong> Dessin, jeux vidéo, randonnée.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Fin Présentation Personnelle -->
+
+    <!-- Présentation du BTS -->
+    <section id="presentation-du-bts" class="section bg-light">
+        <div class="container animate__animated animate__slideInLeft">
+            <h2 class="mb-4">Présentation du BTS SIO</h2>
+            <p>
+                Le <strong>BTS SIO (Services Informatiques aux Organisations)</strong> est une formation en deux ans qui permet de développer des compétences dans les domaines suivants :
+            </p>
+            <ul>
+                <li>Gestion du patrimoine informatique.</li>
+                <li>Réponse aux incidents et demandes d’assistance.</li>
+                <li>Développement et valorisation de la présence en ligne.</li>
+                <li>Travail en mode projet et accompagnement des utilisateurs.</li>
+                <li>Implémentation de solutions de sécurité informatique.</li>
+            </ul>
+            <p><strong>Option SISR :</strong> Administration des réseaux et systèmes.</p>
+        </div>
+    </section>
+    <!-- Fin Présentation du BTS -->
+
+    <!-- Projets Réalisés -->
+    <section id="projets-realises" class="section bg-white">
+        <div class="container animate__animated animate__zoomIn">
+            <h2 class="mb-4">Projets Réalisés</h2>
+            <div class="row">
+                <!-- Projet 1 -->
+                <div class="col-md-6 mb-4">
+                    <div class="card card-project h-100">
+                        <img src="https://via.placeholder.com/600x400" class="card-img-top" alt="Gestionnaire de Tâches">
+                        <div class="card-body">
+                            <h5 class="card-title">Gestionnaire de Tâches</h5>
+                            <p class="card-text">
+                                Développement d’une application web pour la gestion des tâches quotidiennes, permettant aux utilisateurs de créer, modifier et suivre l’avancement de leurs tâches.
+                            </p>
+                            <p><strong>Technologies utilisées :</strong> JavaScript, React, Node.js, MongoDB.</p>
+                            <p><strong>Compétences acquises :</strong> Développement full-stack, gestion de bases de données, UX/UI design.</p>
+                            <a href="https://github.com/juliemartin/gestionnaire-taches" class="btn btn-primary" target="_blank">Voir le projet</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Projet 2 -->
+                <div class="col-md-6 mb-4">
+                    <div class="card card-project h-100">
+                        <img src="https://via.placeholder.com/600x400" class="card-img-top" alt="Plateforme de E-learning">
+                        <div class="card-body">
+                            <h5 class="card-title">Plateforme de E-learning</h5>
+                            <p class="card-text">
+                                Création d’une plateforme de formation en ligne offrant des cours interactifs, des quiz et un suivi des progrès des apprenants.
+                            </p>
+                            <p><strong>Technologies utilisées :</strong> Python, Django, PostgreSQL, Bootstrap.</p>
+                            <p><strong>Compétences acquises :</strong> Déploiement de services web, tests d’intégration, gestion de bases de données relationnelles.</p>
+                            <a href="https://github.com/juliemartin/e-learning-platform" class="btn btn-primary" target="_blank">Voir le projet</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Projet 3 -->
+                <div class="col-md-6 mb-4">
+                    <div class="card card-project h-100">
+                        <img src="https://via.placeholder.com/600x400" class="card-img-top" alt="Application de Suivi de Santé">
+                        <div class="card-body">
+                            <h5 class="card-title">Application de Suivi de Santé</h5>
+                            <p class="card-text">
+                                Développement d’une application mobile permettant aux utilisateurs de suivre leurs paramètres de santé quotidiens, comme la pression artérielle et le niveau d'activité physique.
+                            </p>
+                            <p><strong>Technologies utilisées :</strong> Flutter, Dart, Firebase.</p>
+                            <p><strong>Compétences acquises :</strong> Développement mobile, intégration d'API, gestion de bases de données en temps réel.</p>
+                            <a href="#" class="btn btn-primary disabled">Voir le projet</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Projet 4 -->
+                <div class="col-md-6 mb-4">
+                    <div class="card card-project h-100">
+                        <img src="https://via.placeholder.com/600x400" class="card-img-top" alt="Site E-commerce">
+                        <div class="card-body">
+                            <h5 class="card-title">Site E-commerce</h5>
+                            <p class="card-text">
+                                Conception et développement d’un site e-commerce complet avec gestion des produits, panier d’achat et système de paiement sécurisé.
+                            </p>
+                            <p><strong>Technologies utilisées :</strong> PHP, Laravel, MySQL, Stripe API.</p>
+                            <p><strong>Compétences acquises :</strong> Développement back-end, sécurité des transactions, optimisation des performances.</p>
+                            <a href="#" class="btn btn-primary disabled">Voir le projet</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Fin Projets Réalisés -->
+
+    <!-- Stages Effectués -->
+    <section id="stages-effectues" class="section bg-light">
+        <div class="container animate__animated animate__bounceIn">
+            <h2 class="mb-4">Stages Effectués</h2>
+            <div class="accordion" id="stagesAccordion">
+                <!-- Stage 1 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" 
+                            aria-expanded="true" aria-controls="collapseOne">
+                            Stage 1 : TechSolutions
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" 
+                        data-bs-parent="#stagesAccordion">
+                        <div class="accordion-body">
+                            <p><strong>Durée :</strong> Juin 2023 - Août 2023</p>
+                            <p><strong>Mission principale :</strong> Mise en place d’un système de sauvegarde automatisé pour les serveurs de l’entreprise.</p>
+                            <p><strong>Compétences développées :</strong></p>
+                            <ul>
+                                <li>Gestion des sauvegardes et restaurations.</li>
+                                <li>Vérification des conditions de continuité de service.</li>
+                                <li>Automatisation des tâches administratives.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- Stage 2 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+                            data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Stage 2 : NetSecure
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" 
+                        data-bs-parent="#stagesAccordion">
+                        <div class="accordion-body">
+                            <p><strong>Durée :</strong> Janvier 2024 - Mars 2024</p>
+                            <p><strong>Mission principale :</strong> Participation au déploiement d’une infrastructure réseau sécurisée pour un nouveau client.</p>
+                            <p><strong>Compétences développées :</strong></p>
+                            <ul>
+                                <li>Traitement des demandes relatives aux services réseau.</li>
+                                <li>Mise en œuvre d’outils de suivi et de diagnostic réseau.</li>
+                                <li>Configuration et sécurisation des équipements réseau.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- Stage 3 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+                            data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            Stage 3 : WebInnovate
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" 
+                        data-bs-parent="#stagesAccordion">
+                        <div class="accordion-body">
+                            <p><strong>Durée :</strong> Juin 2024 - Août 2024</p>
+                            <p><strong>Mission principale :</strong> Développement d’un module de gestion des utilisateurs pour une application interne.</p>
+                            <p><strong>Compétences développées :</strong></p>
+                            <ul>
+                                <li>Développement de fonctionnalités back-end.</li>
+                                <li>Intégration avec des bases de données existantes.</li>
+                                <li>Tests unitaires et débogage.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Fin Stages Effectués -->
+
+    <!-- Veille Technologique -->
+    <section id="veille-technologique" class="section bg-white">
+        <div class="container animate__animated animate__fadeInUp">
+            <h2 class="mb-4">Veille Technologique</h2>
+            <div class="row">
+                <!-- Thème 1 -->
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Sécurité des Réseaux 5G</h5>
+                            <p><strong>Description :</strong> Analyse des tendances technologiques dans le domaine de la sécurité des réseaux 5G, en mettant l’accent sur les nouvelles menaces et les solutions de protection innovantes.</p>
+                            <p><strong>Méthodologie :</strong></p>
+                            <ul>
+                                <li><strong>Outils utilisés :</strong> Flux RSS, alertes Google, agrégateurs de contenu.</li>
+                                <li><strong>Sources principales :</strong> Blogs spécialisés, articles scientifiques, rapports de sécurité.</li>
+                            </ul>
+                            <p><strong>Résultats :</strong> Identification des principales vulnérabilités des réseaux 5G et des meilleures pratiques pour les atténuer, notamment l’utilisation de l’intelligence artificielle pour la détection des intrusions.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Thème 2 -->
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Intelligence Artificielle en Sécurité Informatique</h5>
+                            <p><strong>Description :</strong> Étude des applications de l'intelligence artificielle pour renforcer la sécurité des systèmes informatiques, y compris la détection des anomalies et la prévention des cyberattaques.</p>
+                            <p><strong>Méthodologie :</strong></p>
+                            <ul>
+                                <li><strong>Outils utilisés :</strong> TensorFlow, Python, frameworks de machine learning.</li>
+                                <li><strong>Sources principales :</strong> Publications académiques, conférences technologiques, white papers.</li>
+                            </ul>
+                            <p><strong>Résultats :</strong> Développement de modèles prédictifs capables d'identifier les comportements suspects en temps réel, améliorant ainsi la réactivité face aux menaces.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Fin Veille Technologique -->
+
+    <!-- Contact -->
+    <section id="contact" class="section bg-light">
+        <div class="container animate__animated animate__fadeIn">
+            <h2 class="mb-4">Contact</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <form>
+                        <div class="mb-3">
+                            <label for="nom" class="form-label">Nom</label>
+                            <input type="text" class="form-control" id="nom" placeholder="Votre nom" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Adresse Email</label>
+                            <input type="email" class="form-control" id="email" placeholder="nom@example.com" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Message</label>
+                            <textarea class="form-control" id="message" rows="5" placeholder="Votre message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Envoyer</button>
+                    </form>
+                </div>
+                <div class="col-md-6">
+                    <h5>Vous pouvez également me retrouver sur :</h5>
+                    <p>
+                        <a href="https://github.com/juliemartin" target="_blank" class="me-3">
+                            <i class="fab fa-github fa-2x"></i> GitHub
+                        </a>
+                        <a href="https://linkedin.com/in/juliemartin" target="_blank" class="me-3">
+                            <i class="fab fa-linkedin fa-2x"></i> LinkedIn
+                        </a>
+                        <a href="mailto:jmartin@example.com" class="me-3">
+                            <i class="fas fa-envelope fa-2x"></i> Email
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Fin Contact -->
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            © 2024 Julie Martin. Tous droits réservés.
+            <br>
+            <a href="https://github.com/juliemartin" target="_blank">GitHub</a> |
+            <a href="https://linkedin.com/in/juliemartin" target="_blank">LinkedIn</a> |
+            <a href="mailto:jmartin@example.com">Email</a>
+        </div>
+    </footer>
+    <!-- Fin Footer -->
+
+    <!-- Intégration des scripts Bootstrap et Font Awesome -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>
