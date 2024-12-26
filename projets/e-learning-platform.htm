@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plateforme de e-learning - Portfolio de Julie Martin</title>
+    <meta name="description" content="Détail du projet Plateforme de e-learning de Julie Martin - BTS SIO SISR">
+    <meta name="author" content="Julie Martin">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Flowbite CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.6/flowbite.min.css" rel="stylesheet" />
+    
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    
+    <!-- Phaser.js -->
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            padding-top: 4.5rem;
+            background-color: #f9fafb;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+        }
+        .footer {
+            background-color: #1f2937;
+            color: #ffffff;
+            padding: 20px 0;
+            text-align: center;
+        }
+        .footer a {
+            color: #fbbf24;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        /* Canvas Phaser.js */
+        #game-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 150px;
+            height: 150px;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 bg-white shadow-lg z-50">
+        <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+            <a class="title-font font-bold text-2xl mb-4 md:mb-0" href="../index.html">Portfolio de Julie Martin</a>
+            <button class="md:hidden flex items-center px-3 py-2 border rounded text-gray-200 border-gray-400 hover:text-white hover:border-white" id="nav-toggle">
+                <svg class="fill-current h-3 w-3" viewBox="0 0 20 20">
+                    <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/>
+                </svg>
+            </button>
+            <div class="hidden md:flex flex-grow md:items-center md:w-auto" id="nav-content">
+                <ul class="md:flex md:justify-end md:space-x-6">
+                    <li><a href="../index.html#presentation-personnelle" class="block mt-4 md:inline-block md:mt-0 text-gray-700 hover:text-yellow-400">Présentation</a></li>
+                    <li><a href="../index.html#presentation-du-bts" class="block mt-4 md:inline-block md:mt-0 text-gray-700 hover:text-yellow-400">Le BTS</a></li>
+                    <li><a href="../index.html#projets-realises" class="block mt-4 md:inline-block md:mt-0 text-gray-700 hover:text-yellow-400">Projets</a></li>
+                    <li><a href="../index.html#stages-effectues" class="block mt-4 md:inline-block md:mt-0 text-gray-700 hover:text-yellow-400">Stages</a></li>
+                    <li><a href="../veille.html" class="block mt-4 md:inline-block md:mt-0 text-gray-700 hover:text-yellow-400">Veille</a></li>
+                    <li><a href="../index.html#contact" class="block mt-4 md:inline-block md:mt-0 text-gray-700 hover:text-yellow-400">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Fin Navigation -->
+    
+    <!-- Détail du Projet Plateforme de e-learning -->
+    <section id="detail-projet" class="py-20 bg-white">
+        <div class="container mx-auto animate__animated animate__fadeIn">
+            <h2 class="text-4xl font-bold mb-6 text-center">Plateforme de e-learning</h2>
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-6 md:mb-0">
+                    <img src="../assets/images/e-learning-platform.png" alt="Plateforme de E-learning" class="rounded-lg shadow-lg">
+                </div>
+                <div class="md:w-1/2 md:pl-12">
+                    <p class="mb-4">
+                        La **Plateforme de e-learning** est une application web que j'ai développée pour offrir des cours en ligne interactifs, des quiz et un suivi des progrès des apprenants. Cette plateforme vise à faciliter l'apprentissage à distance en rendant les contenus éducatifs accessibles et engageants.
+                    </p>
+                    <p class="mb-4">
+                        Ce projet m'a permis de travailler sur le développement d'une application scalable, intégrant des fonctionnalités telles que l'inscription des utilisateurs, la gestion des cours, la création de quiz interactifs et le suivi des performances des apprenants.
+                    </p>
+                    <p class="mb-4"><strong>Fonctionnalités clés :</strong></p>
+                    <ul class="list-disc list-inside mb-4">
+                        <li>Inscription et authentification des utilisateurs.</li>
+                        <li>Création et gestion des cours avec des modules interactifs.</li>
+                        <li>Quiz et évaluations automatisés pour mesurer les connaissances.</li>
+                        <li>Tableaux de bord personnalisés pour le suivi des progrès.</li>
+                        <li>Système de notifications pour les nouvelles leçons et les rappels.</li>
+                    </ul>
+                    <p class="mb-4"><strong>Technologies utilisées :</strong> Python, Django, PostgreSQL, Bootstrap.</p>
+                    <p class="mb-4"><strong>Compétences développées :</strong></p>
+                    <ul class="list-disc list-inside mb-4">
+                        <li>Développement back-end avec Django.</li>
+                        <li>Gestion de bases de données relationnelles avec PostgreSQL.</li>
+                        <li>Conception responsive avec Bootstrap.</li>
+                        <li>Déploiement et maintenance de services web.</li>
+                    </ul>
+                    <a href="https://github.com/juliemartin/e-learning-platform" target="_blank" class="text-yellow-400 hover:text-yellow-600 font-bold">Voir le projet sur GitHub <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Fin Détail du Projet -->
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container mx-auto">
+            © 2024 Julie Martin. Tous droits réservés.
+            <br>
+            <a href="https://github.com/juliemartin" target="_blank">GitHub</a> |
+            <a href="https://linkedin.com/in/juliemartin" target="_blank">LinkedIn</a> |
+            <a href="mailto:jmartin@example.com">Email</a>
+        </div>
+    </footer>
+    <!-- Fin Footer -->
+    
+    <!-- Canvas pour Phaser.js -->
+    <div id="game-container"></div>
+    
+    <!-- Flowbite JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.6/flowbite.min.js"></script>
+    
+    <!-- Scripts Personnalisés -->
+    <script>
+        // Navigation Toggle pour Mobile
+        document.getElementById('nav-toggle').addEventListener('click', function () {
+            const navContent = document.getElementById('nav-content');
+            navContent.classList.toggle('hidden');
+        });
+
+        // Phaser.js Configuration
+        const config = {
+            type: Phaser.AUTO,
+            width: 150,
+            height: 150,
+            parent: 'game-container',
+            transparent: true,
+            physics: {
+                default: 'arcade',
+                arcade: {
+                    gravity: { y: 0 },
+                    debug: false
+                }
+            },
+            scene: {
+                preload: preload,
+                create: create,
+                update: update
+            }
+        };
+
+        const game = new Phaser.Game(config);
+        let player;
+
+        function preload () {
+            // Chargement de l'image du personnage (utilisez une image PNG transparente)
+            this.load.image('player', '../assets/sprites/player.png'); // Assurez-vous que l'image est dans le dossier correct
+        }
+
+        function create () {
+            player = this.physics.add.sprite(75, 75, 'player');
+            player.setInteractive();
+
+            // Détection des clics sur le personnage
+            player.on('pointerdown', () => {
+                // Exemple : naviguer vers une section spécifique
+                window.scrollTo({
+                    top: document.getElementById('detail-projet').offsetTop - 60,
+                    behavior: 'smooth'
+                });
+            });
+        }
+
+        function update () {
+            // Animation ou mouvement du personnage
+            player.rotation += 0.01;
+        }
+    </script>
+    
+</body>
+</html>
