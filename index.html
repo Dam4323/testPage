@@ -7,26 +7,29 @@
     <meta name="description" content="Portfolio de Julie Martin - BTS SIO SISR">
     <meta name="author" content="Julie Martin">
     
-    <!-- Intégration de Google Fonts -->
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     
-    <!-- Intégration de Tailwind CSS via CDN -->
+    <!-- Tailwind CSS via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Intégration de Animate.css -->
+    <!-- Flowbite CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.6/flowbite.min.css" rel="stylesheet" />
+    
+    <!-- Animate.css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     
-    <!-- Intégration de Font Awesome pour les icônes -->
+    <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     
-    <!-- Intégration de Phaser.js -->
+    <!-- Phaser.js -->
     <script src="https://cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.js"></script>
     
     <style>
         body {
             font-family: 'Roboto', sans-serif;
             padding-top: 4.5rem;
-            background-color: #f0f2f5;
+            background-color: #f9fafb;
         }
         h1, h2, h3, h4, h5, h6 {
             font-family: 'Playfair Display', serif;
@@ -56,7 +59,7 @@
 <body class="text-gray-800">
 
     <!-- Navigation -->
-    <nav class="fixed top-0 left-0 right-0 bg-gray-800 text-white shadow-lg z-50">
+    <nav class="fixed top-0 left-0 right-0 bg-white shadow-lg z-50">
         <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
             <a class="title-font font-bold text-2xl mb-4 md:mb-0" href="#">Portfolio de Julie Martin</a>
             <button class="md:hidden flex items-center px-3 py-2 border rounded text-gray-200 border-gray-400 hover:text-white hover:border-white" id="nav-toggle">
@@ -66,12 +69,12 @@
             </button>
             <div class="hidden md:flex flex-grow md:items-center md:w-auto" id="nav-content">
                 <ul class="md:flex md:justify-end md:space-x-6">
-                    <li><a href="#presentation-personnelle" class="block mt-4 md:inline-block md:mt-0 hover:text-yellow-400">Présentation</a></li>
-                    <li><a href="#presentation-du-bts" class="block mt-4 md:inline-block md:mt-0 hover:text-yellow-400">Le BTS</a></li>
-                    <li><a href="#projets-realises" class="block mt-4 md:inline-block md:mt-0 hover:text-yellow-400">Projets</a></li>
-                    <li><a href="#stages-effectues" class="block mt-4 md:inline-block md:mt-0 hover:text-yellow-400">Stages</a></li>
-                    <li><a href="veille.html" class="block mt-4 md:inline-block md:mt-0 hover:text-yellow-400">Veille</a></li>
-                    <li><a href="#contact" class="block mt-4 md:inline-block md:mt-0 hover:text-yellow-400">Contact</a></li>
+                    <li><a href="#presentation-personnelle" class="block mt-4 md:inline-block md:mt-0 text-gray-700 hover:text-yellow-400">Présentation</a></li>
+                    <li><a href="#presentation-du-bts" class="block mt-4 md:inline-block md:mt-0 text-gray-700 hover:text-yellow-400">Le BTS</a></li>
+                    <li><a href="#projets-realises" class="block mt-4 md:inline-block md:mt-0 text-gray-700 hover:text-yellow-400">Projets</a></li>
+                    <li><a href="#stages-effectues" class="block mt-4 md:inline-block md:mt-0 text-gray-700 hover:text-yellow-400">Stages</a></li>
+                    <li><a href="veille.html" class="block mt-4 md:inline-block md:mt-0 text-gray-700 hover:text-yellow-400">Veille</a></li>
+                    <li><a href="#contact" class="block mt-4 md:inline-block md:mt-0 text-gray-700 hover:text-yellow-400">Contact</a></li>
                 </ul>
             </div>
         </div>
@@ -179,47 +182,51 @@
     <section id="stages-effectues" class="py-20 bg-gray-100">
         <div class="container mx-auto animate__animated animate__bounceIn">
             <h2 class="text-4xl font-bold mb-6 text-center">Stages effectués</h2>
-            <div class="max-w-3xl mx-auto">
-                <div class="space-y-6">
-                    <!-- Stage 1 -->
-                    <div class="bg-gray-50 rounded-lg shadow-lg p-6">
-                        <h3 class="text-2xl font-semibold mb-2">Stage 1 : TechSolutions</h3>
-                        <p class="mb-4"><strong>Durée :</strong> Juin 2023 - Août 2023</p>
-                        <p class="mb-4"><strong>Mission principale :</strong> Mise en place d’un système de sauvegarde automatisé pour les serveurs de l’entreprise.</p>
-                        <p class="mb-4"><strong>Description :</strong> Durant ce stage, j'ai été responsable de l'implémentation d'un système de sauvegarde fiable et automatisé. Cela incluait la configuration des serveurs, la planification des sauvegardes régulières et la vérification des restaurations pour garantir la continuité de service.</p>
-                        <p class="mb-4"><strong>Compétences développées :</strong></p>
-                        <ul class="list-disc list-inside">
-                            <li>Gestion des sauvegardes et restaurations.</li>
-                            <li>Vérification des conditions de continuité de service.</li>
-                            <li>Automatisation des tâches administratives.</li>
-                        </ul>
-                    </div>
-                    <!-- Stage 2 -->
-                    <div class="bg-gray-50 rounded-lg shadow-lg p-6">
-                        <h3 class="text-2xl font-semibold mb-2">Stage 2 : NetSecure</h3>
-                        <p class="mb-4"><strong>Durée :</strong> Janvier 2024 - Mars 2024</p>
-                        <p class="mb-4"><strong>Mission principale :</strong> Participation au déploiement d’une infrastructure réseau sécurisée pour un nouveau client.</p>
-                        <p class="mb-4"><strong>Description :</strong> Lors de ce stage, j'ai collaboré avec l'équipe réseau pour déployer une infrastructure sécurisée répondant aux besoins spécifiques du client. Cela incluait la configuration des équipements réseau, la mise en place de mesures de sécurité et le suivi de la performance du réseau.</p>
-                        <p class="mb-4"><strong>Compétences développées :</strong></p>
-                        <ul class="list-disc list-inside">
-                            <li>Traitement des demandes relatives aux services réseau.</li>
-                            <li>Mise en œuvre d’outils de suivi et de diagnostic réseau.</li>
-                            <li>Configuration et sécurisation des équipements réseau.</li>
-                        </ul>
-                    </div>
-                    <!-- Stage 3 -->
-                    <div class="bg-gray-50 rounded-lg shadow-lg p-6">
-                        <h3 class="text-2xl font-semibold mb-2">Stage 3 : WebInnovate</h3>
-                        <p class="mb-4"><strong>Durée :</strong> Juin 2024 - Août 2024</p>
-                        <p class="mb-4"><strong>Mission principale :</strong> Développement d’un module de gestion des utilisateurs pour une application interne.</p>
-                        <p class="mb-4"><strong>Description :</strong> Ce stage m'a permis de travailler sur le développement d'un module crucial pour une application interne, visant à améliorer la gestion des utilisateurs et des droits d'accès. J'ai également participé aux phases de tests et de débogage pour assurer la qualité du module.</p>
-                        <p class="mb-4"><strong>Compétences développées :</strong></p>
-                        <ul class="list-disc list-inside">
-                            <li>Développement de fonctionnalités back-end.</li>
-                            <li>Intégration avec des bases de données existantes.</li>
-                            <li>Tests unitaires et débogage.</li>
-                        </ul>
-                    </div>
+            <div class="max-w-3xl mx-auto space-y-6">
+                <!-- Stage 1 -->
+                <div class="bg-gray-50 rounded-lg shadow-lg p-6">
+                    <h3 class="text-2xl font-semibold mb-2">Stage 1 : TechSolutions</h3>
+                    <p class="mb-4"><strong>Durée :</strong> Juin 2023 - Août 2023</p>
+                    <p class="mb-4"><strong>Mission principale :</strong> Mise en place d’un système de sauvegarde automatisé pour les serveurs de l’entreprise.</p>
+                    <p class="mb-4">
+                        Durant ce stage, j'ai été responsable de l'implémentation d'un système de sauvegarde fiable et automatisé. Cela incluait la configuration des serveurs, la planification des sauvegardes régulières et la vérification des restaurations pour garantir la continuité de service.
+                    </p>
+                    <p class="mb-4"><strong>Compétences développées :</strong></p>
+                    <ul class="list-disc list-inside">
+                        <li>Gestion des sauvegardes et restaurations.</li>
+                        <li>Vérification des conditions de continuité de service.</li>
+                        <li>Automatisation des tâches administratives.</li>
+                    </ul>
+                </div>
+                <!-- Stage 2 -->
+                <div class="bg-gray-50 rounded-lg shadow-lg p-6">
+                    <h3 class="text-2xl font-semibold mb-2">Stage 2 : NetSecure</h3>
+                    <p class="mb-4"><strong>Durée :</strong> Janvier 2024 - Mars 2024</p>
+                    <p class="mb-4"><strong>Mission principale :</strong> Participation au déploiement d’une infrastructure réseau sécurisée pour un nouveau client.</p>
+                    <p class="mb-4">
+                        Lors de ce stage, j'ai collaboré avec l'équipe réseau pour déployer une infrastructure sécurisée répondant aux besoins spécifiques du client. Cela incluait la configuration des équipements réseau, la mise en place de mesures de sécurité et le suivi de la performance du réseau.
+                    </p>
+                    <p class="mb-4"><strong>Compétences développées :</strong></p>
+                    <ul class="list-disc list-inside">
+                        <li>Traitement des demandes relatives aux services réseau.</li>
+                        <li>Mise en œuvre d’outils de suivi et de diagnostic réseau.</li>
+                        <li>Configuration et sécurisation des équipements réseau.</li>
+                    </ul>
+                </div>
+                <!-- Stage 3 -->
+                <div class="bg-gray-50 rounded-lg shadow-lg p-6">
+                    <h3 class="text-2xl font-semibold mb-2">Stage 3 : WebInnovate</h3>
+                    <p class="mb-4"><strong>Durée :</strong> Juin 2024 - Août 2024</p>
+                    <p class="mb-4"><strong>Mission principale :</strong> Développement d’un module de gestion des utilisateurs pour une application interne.</p>
+                    <p class="mb-4">
+                        Ce stage m'a permis de travailler sur le développement d'un module crucial pour une application interne, visant à améliorer la gestion des utilisateurs et des droits d'accès. J'ai également participé aux phases de tests et de débogage pour assurer la qualité du module.
+                    </p>
+                    <p class="mb-4"><strong>Compétences développées :</strong></p>
+                    <ul class="list-disc list-inside">
+                        <li>Développement de fonctionnalités back-end.</li>
+                        <li>Intégration avec des bases de données existantes.</li>
+                        <li>Tests unitaires et débogage.</li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -282,6 +289,9 @@
     <!-- Canvas pour Phaser.js -->
     <div id="game-container"></div>
     
+    <!-- Flowbite JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.6/flowbite.min.js"></script>
+    
     <!-- Scripts Personnalisés -->
     <script>
         // Navigation Toggle pour Mobile
@@ -325,7 +335,7 @@
 
             // Détection des clics sur le personnage
             player.on('pointerdown', () => {
-                // Naviguer directement vers les différentes sections
+                // Exemple de navigation vers une section
                 window.scrollTo({
                     top: document.getElementById('projets-realises').offsetTop - 60,
                     behavior: 'smooth'
