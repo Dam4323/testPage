@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veille Technologique - Mon Portfolio Interactif</title>
+    <meta name="description" content="Veille technologique de Julie Martin - BTS SIO SISR">
+    <meta name="author" content="Julie Martin">
+    
+    <!-- Intégration de Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Intégration de Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Intégration de Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+    <!-- Intégration de Font Awesome pour les icônes -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    
+    <!-- Intégration de Phaser.js -->
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            padding-top: 4.5rem;
+            background-color: #f0f2f5;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+        }
+        .footer {
+            background-color: #1f2937;
+            color: #ffffff;
+            padding: 20px 0;
+            text-align: center;
+        }
+        .footer a {
+            color: #fbbf24;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        /* Canvas Phaser.js */
+        #game-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 150px;
+            height: 150px;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 bg-gray-800 text-white shadow-lg z-50">
+        <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+            <a class="title-font font-bold text-2xl mb-4 md:mb-0" href="index.html">Portfolio de Julie Martin</a>
+            <button class="md:hidden flex items-center px-3 py-2 border rounded text-gray-200 border-gray-400 hover:text-white hover:border-white" id="nav-toggle">
+                <svg class="fill-current h-3 w-3" viewBox="0 0 20 20">
+                    <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/>
+                </svg>
+            </button>
+            <div class="hidden md:flex flex-grow md:items-center md:w-auto" id="nav-content">
+                <ul class="md:flex md:justify-end md:space-x-6">
+                    <li><a href="index.html#presentation-personnelle" class="block mt-4 md:inline-block md:mt-0 hover:text-yellow-400">Présentation</a></li>
+                    <li><a href="index.html#presentation-du-bts" class="block mt-4 md:inline-block md:mt-0 hover:text-yellow-400">Le BTS</a></li>
+                    <li><a href="index.html#projets-realises" class="block mt-4 md:inline-block md:mt-0 hover:text-yellow-400">Projets</a></li>
+                    <li><a href="index.html#stages-effectues" class="block mt-4 md:inline-block md:mt-0 hover:text-yellow-400">Stages</a></li>
+                    <li><a href="veille.html" class="block mt-4 md:inline-block md:mt-0 hover:text-yellow-400">Veille</a></li>
+                    <li><a href="index.html#contact" class="block mt-4 md:inline-block md:mt-0 hover:text-yellow-400">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Fin Navigation -->
+    
+    <!-- Veille Technologique -->
+    <section id="veille-technologique" class="py-20 bg-white">
+        <div class="container mx-auto animate__animated animate__fadeIn">
+            <h2 class="text-4xl font-bold mb-6 text-center">Veille technologique</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Thème 1 -->
+                <div class="bg-gray-50 rounded-lg shadow-lg p-6">
+                    <h3 class="text-2xl font-semibold mb-2">Sécurité des réseaux 5G</h3>
+                    <p class="mb-4">
+                        L'avènement de la 5G a révolutionné les communications mobiles en offrant des vitesses de connexion extrêmement rapides et une latence réduite. Cependant, cette avancée technologique s'accompagne de nouveaux défis en matière de sécurité. Les réseaux 5G introduisent des surfaces d'attaque plus vastes et diversifiées, rendant indispensable la mise en place de mesures de protection robustes.
+                    </p>
+                    <p class="mb-4"><strong>Approches innovantes :</strong></p>
+                    <ul class="list-disc list-inside mb-4">
+                        <li>Utilisation de l'intelligence artificielle pour la détection et la prévention des intrusions.</li>
+                        <li>Mise en place de mécanismes de chiffrement avancés pour sécuriser les communications.</li>
+                        <li>Développement de protocoles de sécurité spécifiques adaptés aux architectures 5G.</li>
+                    </ul>
+                    <p class="mb-4">
+                        Ces initiatives visent à renforcer la résilience des réseaux 5G contre les cybermenaces, assurant ainsi la fiabilité et la sécurité des services offerts aux utilisateurs finaux.
+                    </p>
+                </div>
+                <!-- Thème 2 -->
+                <div class="bg-gray-50 rounded-lg shadow-lg p-6">
+                    <h3 class="text-2xl font-semibold mb-2">Intelligence artificielle en sécurité informatique</h3>
+                    <p class="mb-4">
+                        L'intégration de l'intelligence artificielle (IA) dans la sécurité informatique ouvre de nouvelles perspectives pour la détection des menaces et la protection des systèmes. Les algorithmes d'apprentissage automatique permettent d'analyser de vastes ensembles de données en temps réel, identifiant ainsi des schémas suspects et des anomalies que les méthodes traditionnelles pourraient manquer.
+                    </p>
+                    <p class="mb-4"><strong>Applications de l'IA :</strong></p>
+                    <ul class="list-disc list-inside mb-4">
+                        <li>Détection automatique des comportements anormaux dans les réseaux.</li>
+                        <li>Prédiction et prévention des attaques grâce à des modèles prédictifs.</li>
+                        <li>Automatisation des réponses aux incidents pour réduire le temps de réaction.</li>
+                    </ul>
+                    <p class="mb-4">
+                        Ces avancées permettent une meilleure anticipation des cyberattaques et une amélioration continue des systèmes de défense, contribuant ainsi à un environnement numérique plus sûr.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Fin Veille Technologique -->
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container mx-auto">
+            © 2024 Julie Martin. Tous droits réservés.
+            <br>
+            <a href="https://github.com/juliemartin" target="_blank">GitHub</a> |
+            <a href="https://linkedin.com/in/juliemartin" target="_blank">LinkedIn</a> |
+            <a href="mailto:jmartin@example.com">Email</a>
+        </div>
+    </footer>
+    <!-- Fin Footer -->
+    
+    <!-- Canvas pour Phaser.js -->
+    <div id="game-container"></div>
+    
+    <!-- Scripts Personnalisés -->
+    <script>
+        // Navigation Toggle pour Mobile
+        document.getElementById('nav-toggle').addEventListener('click', function () {
+            const navContent = document.getElementById('nav-content');
+            navContent.classList.toggle('hidden');
+        });
+
+        // Phaser.js Configuration
+        const config = {
+            type: Phaser.AUTO,
+            width: 150,
+            height: 150,
+            parent: 'game-container',
+            transparent: true,
+            physics: {
+                default: 'arcade',
+                arcade: {
+                    gravity: { y: 0 },
+                    debug: false
+                }
+            },
+            scene: {
+                preload: preload,
+                create: create,
+                update: update
+            }
+        };
+
+        const game = new Phaser.Game(config);
+        let player;
+
+        function preload () {
+            // Chargement de l'image du personnage (utilisez une image PNG transparente)
+            this.load.image('player', 'https://i.imgur.com/4AI6GmO.png'); // Remplacez par l'URL de votre sprite
+        }
+
+        function create () {
+            player = this.physics.add.sprite(75, 75, 'player');
+            player.setInteractive();
+
+            // Détection des clics sur le personnage
+            player.on('pointerdown', () => {
+                // Naviguer vers une section spécifique ou ouvrir un menu
+                alert('Bienvenue sur la page de veille technologique !');
+            });
+        }
+
+        function update () {
+            // Animation ou mouvement du personnage
+            player.rotation += 0.01;
+        }
+    </script>
+    
+</body>
+</html>

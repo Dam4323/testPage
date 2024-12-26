@@ -42,24 +42,6 @@
             text-decoration: none;
             margin: 0 10px;
         }
-        .card-project:hover {
-            transform: scale(1.05);
-            transition: transform 0.3s;
-        }
-        /* Personnalisation du scrollbar */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1; 
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #888; 
-            border-radius: 5px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #555; 
-        }
         /* Canvas Phaser.js */
         #game-container {
             position: fixed;
@@ -88,7 +70,7 @@
                     <li><a href="#presentation-du-bts" class="block mt-4 md:inline-block md:mt-0 hover:text-yellow-400">Le BTS</a></li>
                     <li><a href="#projets-realises" class="block mt-4 md:inline-block md:mt-0 hover:text-yellow-400">Projets</a></li>
                     <li><a href="#stages-effectues" class="block mt-4 md:inline-block md:mt-0 hover:text-yellow-400">Stages</a></li>
-                    <li><a href="#veille-technologique" class="block mt-4 md:inline-block md:mt-0 hover:text-yellow-400">Veille</a></li>
+                    <li><a href="veille.html" class="block mt-4 md:inline-block md:mt-0 hover:text-yellow-400">Veille</a></li>
                     <li><a href="#contact" class="block mt-4 md:inline-block md:mt-0 hover:text-yellow-400">Contact</a></li>
                 </ul>
             </div>
@@ -99,23 +81,18 @@
     <!-- Présentation Personnelle -->
     <section id="presentation-personnelle" class="py-20 bg-white">
         <div class="container mx-auto animate__animated animate__fadeIn">
-            <h2 class="text-4xl font-bold mb-6 text-center">Présentation Personnelle</h2>
+            <h2 class="text-4xl font-bold mb-6 text-center">Présentation personnelle</h2>
             <div class="flex flex-col md:flex-row items-center">
                 <div class="md:w-1/3 mb-6 md:mb-0">
                     <img src="https://via.placeholder.com/300" alt="Photo de Julie Martin" class="rounded-full shadow-lg">
                 </div>
                 <div class="md:w-2/3 md:pl-12">
                     <p class="mb-4">
-                        Bonjour ! Je m'appelle <strong>Julie Martin</strong> et je suis étudiante en <strong>BTS SIO</strong>, option <strong>SISR</strong>.
-                        Passionnée par les technologies de l'information, je me spécialise dans l'administration des réseaux, des systèmes et la sécurité informatique.
+                        Bonjour ! Je m'appelle <strong>Julie Martin</strong> et je suis étudiante en <strong>BTS SIO</strong>, option <strong>SISR</strong>. Passionnée par les technologies de l'information, je me spécialise dans l'administration des réseaux, des systèmes et la sécurité informatique. Mon parcours académique m'a permis de développer une solide expertise technique ainsi qu'une capacité à gérer des projets complexes.
                     </p>
-                    <ul class="list-disc list-inside mb-4">
-                        <li>🎓 <strong>Formation :</strong> BTS SIO (Services Informatiques aux Organisations), option SISR.</li>
-                        <li>💻 <strong>Spécialisation :</strong> Administration réseaux, systèmes et sécurité.</li>
-                        <li>🌱 <strong>Compétences :</strong> Développement, déploiement et méthodologie de projets.</li>
-                        <li>🌍 <strong>Langues :</strong> Français (natif), Anglais (courant).</li>
-                        <li>🎨 <strong>Hobbies :</strong> Dessin, jeux vidéo, randonnée.</li>
-                    </ul>
+                    <p class="mb-4">
+                        Mon objectif est de contribuer à la sécurisation et à l'optimisation des infrastructures informatiques au sein d'une entreprise dynamique. En plus de mes compétences techniques, je possède une aptitude à travailler en équipe et à communiquer efficacement avec les utilisateurs et les parties prenantes.
+                    </p>
                 </div>
             </div>
         </div>
@@ -127,16 +104,11 @@
         <div class="container mx-auto animate__animated animate__slideInLeft">
             <h2 class="text-4xl font-bold mb-6 text-center">Présentation du BTS SIO</h2>
             <p class="mb-4 text-center">
-                Le <strong>BTS SIO (Services Informatiques aux Organisations)</strong> est une formation en deux ans qui permet de développer des compétences dans les domaines suivants :
+                Le <strong>BTS SIO (Services Informatiques aux Organisations)</strong> est une formation en deux ans qui vise à former des professionnels compétents dans les domaines de l'informatique au service des organisations. Cette formation offre une combinaison équilibrée entre enseignements théoriques et pratiques, permettant aux étudiants d'acquérir des compétences techniques avancées et une compréhension approfondie des enjeux organisationnels.
             </p>
-            <ul class="list-disc list-inside max-w-2xl mx-auto">
-                <li>Gestion du patrimoine informatique.</li>
-                <li>Réponse aux incidents et demandes d’assistance.</li>
-                <li>Développement et valorisation de la présence en ligne.</li>
-                <li>Travail en mode projet et accompagnement des utilisateurs.</li>
-                <li>Implémentation de solutions de sécurité informatique.</li>
-            </ul>
-            <p class="mt-4 text-center"><strong>Option SISR :</strong> Administration des réseaux et systèmes.</p>
+            <p class="mb-4 text-center">
+                En choisissant l'option <strong>SISR (Solutions d'Infrastructure, Systèmes et Réseaux)</strong>, les étudiants se spécialisent dans l'administration des réseaux, la gestion des systèmes informatiques et la mise en place de solutions de sécurité adaptées aux besoins des entreprises. Cette option prépare les étudiants à intervenir efficacement dans la gestion des infrastructures IT, assurant ainsi la continuité et la performance des services informatiques.
+            </p>
         </div>
     </section>
     <!-- Fin Présentation du BTS -->
@@ -144,18 +116,18 @@
     <!-- Projets Réalisés -->
     <section id="projets-realises" class="py-20 bg-white">
         <div class="container mx-auto animate__animated animate__zoomIn">
-            <h2 class="text-4xl font-bold mb-6 text-center">Projets Réalisés</h2>
+            <h2 class="text-4xl font-bold mb-6 text-center">Projets réalisés</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <!-- Projet 1 -->
                 <div class="bg-gray-50 rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
                     <img src="https://via.placeholder.com/600x400" alt="Gestionnaire de Tâches" class="w-full h-48 object-cover">
                     <div class="p-6">
-                        <h3 class="text-2xl font-semibold mb-2">Gestionnaire de Tâches</h3>
+                        <h3 class="text-2xl font-semibold mb-2">Gestionnaire de tâches</h3>
                         <p class="mb-4">
-                            Développement d’une application web pour la gestion des tâches quotidiennes, permettant aux utilisateurs de créer, modifier et suivre l’avancement de leurs tâches.
+                            J'ai développé une application web permettant aux utilisateurs de gérer leurs tâches quotidiennes de manière efficace. Cette application offre des fonctionnalités de création, modification et suivi de l'avancement des tâches, facilitant ainsi l'organisation personnelle et professionnelle.
                         </p>
                         <p class="mb-2"><strong>Technologies utilisées :</strong> JavaScript, React, Node.js, MongoDB.</p>
-                        <p class="mb-4"><strong>Compétences acquises :</strong> Développement full-stack, gestion de bases de données, UX/UI design.</p>
+                        <p class="mb-4"><strong>Compétences acquises :</strong> Développement full-stack, gestion de bases de données, conception UX/UI.</p>
                         <a href="https://github.com/juliemartin/gestionnaire-taches" target="_blank" class="text-yellow-400 hover:text-yellow-600 font-bold">Voir le projet <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
@@ -163,12 +135,12 @@
                 <div class="bg-gray-50 rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
                     <img src="https://via.placeholder.com/600x400" alt="Plateforme de E-learning" class="w-full h-48 object-cover">
                     <div class="p-6">
-                        <h3 class="text-2xl font-semibold mb-2">Plateforme de E-learning</h3>
+                        <h3 class="text-2xl font-semibold mb-2">Plateforme de e-learning</h3>
                         <p class="mb-4">
-                            Création d’une plateforme de formation en ligne offrant des cours interactifs, des quiz et un suivi des progrès des apprenants.
+                            J'ai conçu une plateforme de formation en ligne offrant des cours interactifs, des quiz et un suivi des progrès des apprenants. Cette plateforme vise à faciliter l'apprentissage à distance en rendant les contenus éducatifs accessibles et engageants.
                         </p>
                         <p class="mb-2"><strong>Technologies utilisées :</strong> Python, Django, PostgreSQL, Bootstrap.</p>
-                        <p class="mb-4"><strong>Compétences acquises :</strong> Déploiement de services web, tests d’intégration, gestion de bases de données relationnelles.</p>
+                        <p class="mb-4"><strong>Compétences acquises :</strong> Déploiement de services web, tests d'intégration, gestion de bases de données relationnelles.</p>
                         <a href="https://github.com/juliemartin/e-learning-platform" target="_blank" class="text-yellow-400 hover:text-yellow-600 font-bold">Voir le projet <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
@@ -176,9 +148,9 @@
                 <div class="bg-gray-50 rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
                     <img src="https://via.placeholder.com/600x400" alt="Application de Suivi de Santé" class="w-full h-48 object-cover">
                     <div class="p-6">
-                        <h3 class="text-2xl font-semibold mb-2">Application de Suivi de Santé</h3>
+                        <h3 class="text-2xl font-semibold mb-2">Application de suivi de santé</h3>
                         <p class="mb-4">
-                            Développement d’une application mobile permettant aux utilisateurs de suivre leurs paramètres de santé quotidiens, comme la pression artérielle et le niveau d'activité physique.
+                            J'ai développé une application mobile permettant aux utilisateurs de suivre leurs paramètres de santé quotidiens, tels que la pression artérielle et le niveau d'activité physique. Cette application vise à promouvoir un mode de vie sain en fournissant des outils de suivi personnalisés.
                         </p>
                         <p class="mb-2"><strong>Technologies utilisées :</strong> Flutter, Dart, Firebase.</p>
                         <p class="mb-4"><strong>Compétences acquises :</strong> Développement mobile, intégration d'API, gestion de bases de données en temps réel.</p>
@@ -187,11 +159,11 @@
                 </div>
                 <!-- Projet 4 -->
                 <div class="bg-gray-50 rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
-                    <img src="https://via.placeholder.com/600x400" alt="Site E-commerce" class="w-full h-48 object-cover">
+                    <img src="https://via.placeholder.com/600x400" alt="Site e-commerce" class="w-full h-48 object-cover">
                     <div class="p-6">
-                        <h3 class="text-2xl font-semibold mb-2">Site E-commerce</h3>
+                        <h3 class="text-2xl font-semibold mb-2">Site e-commerce</h3>
                         <p class="mb-4">
-                            Conception et développement d’un site e-commerce complet avec gestion des produits, panier d’achat et système de paiement sécurisé.
+                            J'ai conçu et développé un site e-commerce complet avec gestion des produits, panier d'achat et système de paiement sécurisé. Ce projet a renforcé mes compétences en développement back-end et en sécurité des transactions en ligne.
                         </p>
                         <p class="mb-2"><strong>Technologies utilisées :</strong> PHP, Laravel, MySQL, Stripe API.</p>
                         <p class="mb-4"><strong>Compétences acquises :</strong> Développement back-end, sécurité des transactions, optimisation des performances.</p>
@@ -206,103 +178,53 @@
     <!-- Stages Effectués -->
     <section id="stages-effectues" class="py-20 bg-gray-100">
         <div class="container mx-auto animate__animated animate__bounceIn">
-            <h2 class="text-4xl font-bold mb-6 text-center">Stages Effectués</h2>
+            <h2 class="text-4xl font-bold mb-6 text-center">Stages effectués</h2>
             <div class="max-w-3xl mx-auto">
-                <div class="accordion" id="stagesAccordion">
+                <div class="space-y-6">
                     <!-- Stage 1 -->
-                    <div class="mb-4">
-                        <button class="w-full text-left px-4 py-2 bg-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            <div class="flex justify-between items-center">
-                                <span>Stage 1 : TechSolutions</span>
-                                <i class="fas fa-chevron-down"></i>
-                            </div>
-                        </button>
-                        <div id="collapseOne" class="mt-2 p-4 bg-gray-50 rounded-lg">
-                            <p><strong>Durée :</strong> Juin 2023 - Août 2023</p>
-                            <p><strong>Mission principale :</strong> Mise en place d’un système de sauvegarde automatisé pour les serveurs de l’entreprise.</p>
-                            <p><strong>Compétences développées :</strong></p>
-                            <ul class="list-disc list-inside">
-                                <li>Gestion des sauvegardes et restaurations.</li>
-                                <li>Vérification des conditions de continuité de service.</li>
-                                <li>Automatisation des tâches administratives.</li>
-                            </ul>
-                        </div>
+                    <div class="bg-gray-50 rounded-lg shadow-lg p-6">
+                        <h3 class="text-2xl font-semibold mb-2">Stage 1 : TechSolutions</h3>
+                        <p class="mb-4"><strong>Durée :</strong> Juin 2023 - Août 2023</p>
+                        <p class="mb-4"><strong>Mission principale :</strong> Mise en place d’un système de sauvegarde automatisé pour les serveurs de l’entreprise.</p>
+                        <p class="mb-4"><strong>Description :</strong> Durant ce stage, j'ai été responsable de l'implémentation d'un système de sauvegarde fiable et automatisé. Cela incluait la configuration des serveurs, la planification des sauvegardes régulières et la vérification des restaurations pour garantir la continuité de service.</p>
+                        <p class="mb-4"><strong>Compétences développées :</strong></p>
+                        <ul class="list-disc list-inside">
+                            <li>Gestion des sauvegardes et restaurations.</li>
+                            <li>Vérification des conditions de continuité de service.</li>
+                            <li>Automatisation des tâches administratives.</li>
+                        </ul>
                     </div>
                     <!-- Stage 2 -->
-                    <div class="mb-4">
-                        <button class="w-full text-left px-4 py-2 bg-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            <div class="flex justify-between items-center">
-                                <span>Stage 2 : NetSecure</span>
-                                <i class="fas fa-chevron-down"></i>
-                            </div>
-                        </button>
-                        <div id="collapseTwo" class="mt-2 p-4 bg-gray-50 rounded-lg hidden">
-                            <p><strong>Durée :</strong> Janvier 2024 - Mars 2024</p>
-                            <p><strong>Mission principale :</strong> Participation au déploiement d’une infrastructure réseau sécurisée pour un nouveau client.</p>
-                            <p><strong>Compétences développées :</strong></p>
-                            <ul class="list-disc list-inside">
-                                <li>Traitement des demandes relatives aux services réseau.</li>
-                                <li>Mise en œuvre d’outils de suivi et de diagnostic réseau.</li>
-                                <li>Configuration et sécurisation des équipements réseau.</li>
-                            </ul>
-                        </div>
+                    <div class="bg-gray-50 rounded-lg shadow-lg p-6">
+                        <h3 class="text-2xl font-semibold mb-2">Stage 2 : NetSecure</h3>
+                        <p class="mb-4"><strong>Durée :</strong> Janvier 2024 - Mars 2024</p>
+                        <p class="mb-4"><strong>Mission principale :</strong> Participation au déploiement d’une infrastructure réseau sécurisée pour un nouveau client.</p>
+                        <p class="mb-4"><strong>Description :</strong> Lors de ce stage, j'ai collaboré avec l'équipe réseau pour déployer une infrastructure sécurisée répondant aux besoins spécifiques du client. Cela incluait la configuration des équipements réseau, la mise en place de mesures de sécurité et le suivi de la performance du réseau.</p>
+                        <p class="mb-4"><strong>Compétences développées :</strong></p>
+                        <ul class="list-disc list-inside">
+                            <li>Traitement des demandes relatives aux services réseau.</li>
+                            <li>Mise en œuvre d’outils de suivi et de diagnostic réseau.</li>
+                            <li>Configuration et sécurisation des équipements réseau.</li>
+                        </ul>
                     </div>
                     <!-- Stage 3 -->
-                    <div class="mb-4">
-                        <button class="w-full text-left px-4 py-2 bg-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                            <div class="flex justify-between items-center">
-                                <span>Stage 3 : WebInnovate</span>
-                                <i class="fas fa-chevron-down"></i>
-                            </div>
-                        </button>
-                        <div id="collapseThree" class="mt-2 p-4 bg-gray-50 rounded-lg hidden">
-                            <p><strong>Durée :</strong> Juin 2024 - Août 2024</p>
-                            <p><strong>Mission principale :</strong> Développement d’un module de gestion des utilisateurs pour une application interne.</p>
-                            <p><strong>Compétences développées :</strong></p>
-                            <ul class="list-disc list-inside">
-                                <li>Développement de fonctionnalités back-end.</li>
-                                <li>Intégration avec des bases de données existantes.</li>
-                                <li>Tests unitaires et débogage.</li>
-                            </ul>
-                        </div>
+                    <div class="bg-gray-50 rounded-lg shadow-lg p-6">
+                        <h3 class="text-2xl font-semibold mb-2">Stage 3 : WebInnovate</h3>
+                        <p class="mb-4"><strong>Durée :</strong> Juin 2024 - Août 2024</p>
+                        <p class="mb-4"><strong>Mission principale :</strong> Développement d’un module de gestion des utilisateurs pour une application interne.</p>
+                        <p class="mb-4"><strong>Description :</strong> Ce stage m'a permis de travailler sur le développement d'un module crucial pour une application interne, visant à améliorer la gestion des utilisateurs et des droits d'accès. J'ai également participé aux phases de tests et de débogage pour assurer la qualité du module.</p>
+                        <p class="mb-4"><strong>Compétences développées :</strong></p>
+                        <ul class="list-disc list-inside">
+                            <li>Développement de fonctionnalités back-end.</li>
+                            <li>Intégration avec des bases de données existantes.</li>
+                            <li>Tests unitaires et débogage.</li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
     </section>
     <!-- Fin Stages Effectués -->
-    
-    <!-- Veille Technologique -->
-    <section id="veille-technologique" class="py-20 bg-white">
-        <div class="container mx-auto animate__animated animate__fadeInUp">
-            <h2 class="text-4xl font-bold mb-6 text-center">Veille Technologique</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Thème 1 -->
-                <div class="bg-gray-50 rounded-lg shadow-lg p-6">
-                    <h3 class="text-2xl font-semibold mb-2">Sécurité des Réseaux 5G</h3>
-                    <p class="mb-4"><strong>Description :</strong> Analyse des tendances technologiques dans le domaine de la sécurité des réseaux 5G, en mettant l’accent sur les nouvelles menaces et les solutions de protection innovantes.</p>
-                    <p class="mb-2"><strong>Méthodologie :</strong></p>
-                    <ul class="list-disc list-inside mb-4">
-                        <li><strong>Outils utilisés :</strong> Flux RSS, alertes Google, agrégateurs de contenu.</li>
-                        <li><strong>Sources principales :</strong> Blogs spécialisés, articles scientifiques, rapports de sécurité.</li>
-                    </ul>
-                    <p><strong>Résultats :</strong> Identification des principales vulnérabilités des réseaux 5G et des meilleures pratiques pour les atténuer, notamment l’utilisation de l’intelligence artificielle pour la détection des intrusions.</p>
-                </div>
-                <!-- Thème 2 -->
-                <div class="bg-gray-50 rounded-lg shadow-lg p-6">
-                    <h3 class="text-2xl font-semibold mb-2">Intelligence Artificielle en Sécurité Informatique</h3>
-                    <p class="mb-4"><strong>Description :</strong> Étude des applications de l'intelligence artificielle pour renforcer la sécurité des systèmes informatiques, y compris la détection des anomalies et la prévention des cyberattaques.</p>
-                    <p class="mb-2"><strong>Méthodologie :</strong></p>
-                    <ul class="list-disc list-inside mb-4">
-                        <li><strong>Outils utilisés :</strong> TensorFlow, Python, frameworks de machine learning.</li>
-                        <li><strong>Sources principales :</strong> Publications académiques, conférences technologiques, white papers.</li>
-                    </ul>
-                    <p><strong>Résultats :</strong> Développement de modèles prédictifs capables d'identifier les comportements suspects en temps réel, améliorant ainsi la réactivité face aux menaces.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Fin Veille Technologique -->
     
     <!-- Contact -->
     <section id="contact" class="py-20 bg-gray-100">
@@ -316,7 +238,7 @@
                             <input type="text" id="nom" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400" placeholder="Votre nom" required>
                         </div>
                         <div class="mb-4">
-                            <label for="email" class="block text-gray-700 font-semibold mb-2">Adresse Email</label>
+                            <label for="email" class="block text-gray-700 font-semibold mb-2">Adresse email</label>
                             <input type="email" id="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400" placeholder="nom@example.com" required>
                         </div>
                         <div class="mb-4">
@@ -368,15 +290,6 @@
             navContent.classList.toggle('hidden');
         });
 
-        // Accordéon Stages Effectués
-        const accordionButtons = document.querySelectorAll('[data-toggle="collapse"]');
-        accordionButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const target = document.querySelector(button.getAttribute('data-target'));
-                target.classList.toggle('hidden');
-            });
-        });
-
         // Phaser.js Configuration
         const config = {
             type: Phaser.AUTO,
@@ -412,41 +325,17 @@
 
             // Détection des clics sur le personnage
             player.on('pointerdown', () => {
-                // Afficher un menu de navigation ou naviguer directement
-                // Exemple : afficher un menu contextuel
-                showNavigationMenu();
+                // Naviguer directement vers les différentes sections
+                window.scrollTo({
+                    top: document.getElementById('projets-realises').offsetTop - 60,
+                    behavior: 'smooth'
+                });
             });
         }
 
         function update () {
             // Animation ou mouvement du personnage
             player.rotation += 0.01;
-        }
-
-        function showNavigationMenu() {
-            // Créer un menu contextuel simple
-            const menu = document.createElement('div');
-            menu.classList.add('fixed', 'bottom-20', 'right-20', 'bg-white', 'shadow-lg', 'rounded-lg', 'p-4', 'z-50', 'animate__animated', 'animate__fadeIn');
-            menu.innerHTML = `
-                <ul class="space-y-2">
-                    <li><a href="#presentation-personnelle" class="block text-gray-800 hover:text-yellow-400">Présentation</a></li>
-                    <li><a href="#presentation-du-bts" class="block text-gray-800 hover:text-yellow-400">Le BTS</a></li>
-                    <li><a href="#projets-realises" class="block text-gray-800 hover:text-yellow-400">Projets</a></li>
-                    <li><a href="#stages-effectues" class="block text-gray-800 hover:text-yellow-400">Stages</a></li>
-                    <li><a href="#veille-technologique" class="block text-gray-800 hover:text-yellow-400">Veille</a></li>
-                    <li><a href="#contact" class="block text-gray-800 hover:text-yellow-400">Contact</a></li>
-                </ul>
-                <button id="close-menu" class="mt-4 w-full bg-red-500 text-white py-2 rounded-lg hover:bg-red-600">Fermer</button>
-            `;
-            document.body.appendChild(menu);
-
-            // Ajouter un écouteur pour fermer le menu
-            document.getElementById('close-menu').addEventListener('click', () => {
-                menu.classList.add('animate__fadeOut');
-                menu.addEventListener('animationend', () => {
-                    menu.remove();
-                });
-            });
         }
     </script>
     
