@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phaser Key Actions with HTML Menu</title>
+  <script src="https://cdn.jsdelivr.net/npm/phaser@3/dist/phaser.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+    canvas {
+      display: block;
+    }
+    #menu {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 300px;
+      height: 200px;
+      background-color: rgba(0, 0, 0, 0.8);
+      color: white;
+      text-align: center;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      display: none;
+      z-index: 10;
+    }
+  </style>
+</head>
+<body>
+  <div id="menu">
+    <h2>Game Menu</h2>
+    <p>Press M to close the menu</p>
+  </div>
+  <script>
+    const config = {
+      type: Phaser.AUTO,
+      width: 800,
+      height: 600,
+      physics: {
+        default: 'arcade',
+        arcade: {
+          gravity: { y: 0 },
+          debug: false
+        }
+      },
+      scene: {
+        preload: preload,
+        create: create,
+        update: update
+      }
+    };
+
+    const game = new Phaser.Game(config);
+    let player;
+    let cursors;
+    let actionText;
+    let isMenuOpen = false;
+    const menuElement = document.getElementById('menu');
+
+    function preload() {
+      this.load.image('player', 'https://phaser.io/content/tutorials/making-your-first-phaser-3-game/player.png');
+      this.load.image('player_alt', 'https://phaser.io/content/tutorials/making-your-first-phaser-3-game/star.png');
+    }
+
+    function create() {
+      // Create the player sprite
+      player = this.physics.add.sprite(400, 300, 'player').setCollideWorldBounds(true);
+
+      // Add a text object for actions
+      actionText = this.add.text(10, 10, '', {
+        fontSize: '20px',
+        fill: '#ffffff'
+      });
+
+      // Keyboard controls
+      cursors = this.input.keyboard.createCursorKeys();
+
+      // Define additional keys
+      this.input.keyboard.on('keydown-Q', () => changePlayerImage.call(this));
+      this.input.keyboard.on('keydown-E', () => displayMessage.call(this, 'Hello, this is a message!'));
+      this.input.keyboard.on('keydown-M', () => toggleMenu.call(this));
+    }
+
+    function update() {
+      if (isMenuOpen) return; // Disable movement when the menu is open
+
+      player.setVelocity(0); // Stop movement by default
+
+      if (cursors.left.isDown) {
+        player.setVelocityX(-200);
+      } else if (cursors.right.isDown) {
+        player.setVelocityX(200);
+      }
+
+      if (cursors.up.isDown) {
+        player.setVelocityY(-200);
+      } else if (cursors.down.isDown) {
+        player.setVelocityY(200);
+      }
+    }
+
+    function changePlayerImage() {
+      player.setTexture(player.texture.key === 'player' ? 'player_alt' : 'player');
+      actionText.setText('Player image changed!');
+    }
+
+    function displayMessage(message) {
+      actionText.setText(message);
+      this.time.delayedCall(2000, () => actionText.setText('')); // Clear the message after 2 seconds
+    }
+
+    function toggleMenu() {
+      isMenuOpen = !isMenuOpen;
+      menuElement.style.display = isMenuOpen ? 'block' : 'none';
+    }
+  </script>
+</body>
+</html>
