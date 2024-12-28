@@ -3,24 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Phaser RPG Pixel Art Avancé</title>
+  <title>Phaser RPG Avancé sans Images</title>
   <script src="https://cdn.jsdelivr.net/npm/phaser@3/dist/phaser.min.js"></script>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
     body {
       margin: 0;
-      font-family: 'Press Start 2P', cursive; /* Font style pour pixel art */
+      font-family: 'Press Start 2P', cursive;
       background-color: #1e1e1e;
       color: #ffffff;
       overflow: hidden;
     }
+
     #game-container {
       width: 800px;
       height: 600px;
       margin: 20px auto;
       border: 5px solid #444;
       position: relative;
-      background-color: #000;
+      background-color: #222;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
     }
+
     #ui-container {
       width: 800px;
       margin: 0 auto;
@@ -30,74 +35,104 @@
       padding: 10px;
       background: #333;
       box-sizing: border-box;
+      border-bottom: 3px solid #555;
     }
+
     #ui-container div {
       display: flex;
       align-items: center;
     }
+
     #ui-container button {
-      padding: 10px 15px;
+      padding: 8px 12px;
       background-color: #555;
-      border: none;
+      border: 2px solid #777;
       color: white;
       cursor: pointer;
       margin-right: 10px;
-      font-size: 12px;
-      font-family: 'Press Start 2P', cursive;
+      font-size: 8px;
+      transition: background-color 0.3s, transform 0.2s;
     }
+
     #ui-container button:hover {
       background-color: #777;
+      transform: scale(1.05);
     }
+
     .panel {
       position: absolute;
       top: 60px;
       right: 20px;
       background: rgba(0, 0, 0, 0.85);
-      padding: 10px;
+      padding: 15px;
       border: 2px solid #555;
-      border-radius: 5px;
+      border-radius: 10px;
       display: none;
       width: 220px;
-      font-size: 10px;
-      font-family: 'Press Start 2P', cursive;
+      font-size: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.7);
     }
+
     .panel.visible {
       display: block;
+      animation: fadeIn 0.5s;
     }
+
     .panel h2 {
       margin-top: 0;
-      font-size: 14px;
+      font-size: 10px;
       text-align: center;
+      border-bottom: 1px solid #555;
+      padding-bottom: 5px;
     }
+
     .bar {
       width: 100%;
       background: #555;
       border-radius: 5px;
       overflow: hidden;
       margin-bottom: 5px;
+      height: 10px;
     }
+
     .bar-inner {
-      height: 15px;
+      height: 100%;
       background: #0f0;
       width: 0%;
+      transition: width 0.3s;
     }
+
+    .health-bar { background: #f00; }
+    .mana-bar { background: #00f; }
+    .exp-bar { background: #ff0; }
+
     #inventory-list, #quest-list {
       list-style: none;
       padding: 0;
       margin: 0;
-      max-height: 200px;
+      max-height: 150px;
       overflow-y: auto;
     }
+
     #inventory-list li, #quest-list li {
       display: flex;
       align-items: center;
       margin-bottom: 5px;
+      padding: 2px 0;
+      border-bottom: 1px solid #444;
     }
-    #inventory-list img, #quest-list img {
-      width: 20px;
-      height: 20px;
+
+    #inventory-list li:last-child, #quest-list li:last-child {
+      border-bottom: none;
+    }
+
+    #inventory-list li::before, #quest-list li::before {
+      content: '■';
       margin-right: 5px;
+      color: #0f0;
+      font-size: 8px;
     }
+
     /* Dialog Box */
     #dialog-box {
       position: absolute;
@@ -108,11 +143,33 @@
       background: rgba(0, 0, 0, 0.9);
       padding: 10px;
       border: 2px solid #555;
-      border-radius: 5px;
+      border-radius: 10px;
       display: none;
-      font-size: 12px;
-      font-family: 'Press Start 2P', cursive;
+      font-size: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.7);
+      animation: fadeIn 0.5s;
     }
+
+    #dialog-box p {
+      margin: 0 0 10px 0;
+      text-align: center;
+    }
+
+    #close-dialog {
+      padding: 5px 10px;
+      background-color: #555;
+      border: 2px solid #777;
+      color: white;
+      cursor: pointer;
+      font-size: 8px;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+
+    #close-dialog:hover {
+      background-color: #777;
+      transform: scale(1.05);
+    }
+
     /* Mini-Map */
     #minimap {
       position: absolute;
@@ -120,17 +177,39 @@
       right: 10px;
       width: 150px;
       height: 150px;
-      background: rgba(0, 0, 0, 0.5);
+      background: rgba(0, 0, 0, 0.7);
       border: 2px solid #555;
+      border-radius: 10px;
       display: none;
+      box-shadow: 0 0 10px rgba(0,0,0,0.7);
+      overflow: hidden;
     }
-    #minimap img {
-      width: 100%;
-      height: 100%;
-      image-rendering: pixelated;
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
-    /* Font for pixel art */
-    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+    /* Feedback Text */
+    .feedback {
+      position: absolute;
+      color: #ff0;
+      font-size: 8px;
+      animation: floatUp 1s forwards;
+      pointer-events: none;
+    }
+
+    @keyframes floatUp {
+      from {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      to {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+    }
   </style>
 </head>
 <body>
@@ -167,28 +246,28 @@
     <h2>Stats</h2>
     <p>Niveau: <span id="hero-level">1</span></p>
     <p>Expérience: <span id="hero-exp">0</span> / <span id="hero-exp-next">100</span></p>
-    <div class="bar">
-      <div class="bar-inner" id="exp-bar"></div>
+    <div class="bar exp-bar">
+      <div class="bar-inner" id="exp-bar-inner"></div>
     </div>
     <p>Santé: <span id="hero-health">100</span></p>
-    <p>Mana: <span id="hero-mana">50</span></p>
-    <div class="bar">
-      <div class="bar-inner" id="health-bar" style="background: #f00;"></div>
+    <div class="bar health-bar">
+      <div class="bar-inner" id="health-bar-inner"></div>
     </div>
-    <div class="bar">
-      <div class="bar-inner" id="mana-bar" style="background: #00f;"></div>
+    <p>Mana: <span id="hero-mana">50</span></p>
+    <div class="bar mana-bar">
+      <div class="bar-inner" id="mana-bar-inner"></div>
     </div>
   </div>
 
   <!-- Dialog Box -->
   <div id="dialog-box">
-    <p id="dialog-text"></p>
-    <button id="close-dialog" style="padding: 5px 10px; font-size: 10px; cursor: pointer;">Fermer</button>
+    <p id="dialog-text">Bonjour, aventurier ! Accomplis nos quêtes pour gagner des récompenses.</p>
+    <button id="close-dialog">Fermer</button>
   </div>
 
   <!-- Mini-Map -->
   <div id="minimap">
-    <img src="https://i.imgur.com/1ZQ9QZK.png" alt="Mini-Map">
+    <canvas id="mini-map-canvas" width="150" height="150" style="background: #333;"></canvas>
   </div>
 
   <script>
@@ -198,15 +277,32 @@
       }
 
       preload() {
-        // Chargement des assets en pixel art
-        this.load.image('hero', 'https://i.imgur.com/7k12EPD.png'); // Remplacez par vos assets pixel art
-        this.load.image('npc', 'https://i.imgur.com/4AiXzf8.png');
-        this.load.image('item', 'https://i.imgur.com/OdL0XPt.png');
-        this.load.image('map', 'https://i.imgur.com/1ZQ9QZK.png');
-        this.load.image('wall', 'https://i.imgur.com/8Iu0R2x.png');
-        this.load.image('skeleton', 'https://i.imgur.com/7b8GZ5C.png');
-        this.load.spritesheet('hero-sprite', 'https://i.imgur.com/7k12EPD.png', { frameWidth: 32, frameHeight: 48 }); // Exemple de spritesheet
-        // Vous pouvez ajouter plus de spritesheets pour les animations
+        // Charger des sprites simples avec des couleurs via graphique Phaser
+        this.graphics = this.add.graphics();
+
+        // Créer un carré vert pour le héros
+        this.graphics.fillStyle(0x00ff00, 1);
+        this.graphics.fillRect(0, 0, 32, 32);
+        this.graphics.generateTexture('hero', 32, 32);
+        this.graphics.clear();
+
+        // Créer un carré bleu pour les ennemis
+        this.graphics.fillStyle(0xff0000, 1);
+        this.graphics.fillRect(0, 0, 32, 32);
+        this.graphics.generateTexture('enemy', 32, 32);
+        this.graphics.clear();
+
+        // Créer des murs gris
+        this.graphics.fillStyle(0x888888, 1);
+        this.graphics.fillRect(0, 0, 32, 32);
+        this.graphics.generateTexture('wall', 32, 32);
+        this.graphics.clear();
+
+        // Créer des items jaunes
+        this.graphics.fillStyle(0xffff00, 1);
+        this.graphics.fillRect(0, 0, 16, 16);
+        this.graphics.generateTexture('item', 16, 16);
+        this.graphics.clear();
       }
 
       create() {
@@ -223,9 +319,9 @@
         ];
         this.kills = 0;
 
-        // Génération aléatoire de niveaux (simplifié avec tuiles)
+        // Génération aléatoire de murs
         this.walls = this.physics.add.staticGroup();
-        for (let i = 0; i < 15; i++) {
+        for (let i = 0; i < 20; i++) {
           const x = Phaser.Math.Between(50, 750);
           const y = Phaser.Math.Between(50, 550);
           this.walls.create(x, y, 'wall');
@@ -240,33 +336,13 @@
           strength: 30
         });
 
-        // Animations du héros (exemple)
-        this.anims.create({
-          key: 'walk',
-          frames: this.anims.generateFrameNumbers('hero-sprite', { start: 0, end: 3 }),
-          frameRate: 10,
-          repeat: -1
-        });
-        this.hero.anims.play('walk', true);
-
-        // Création des NPCs
-        this.npcs = this.physics.add.staticGroup();
-        this.npcs.create(600, 300, 'npc');
-
-        // Création des items
-        this.items = this.physics.add.group({
-          key: 'item',
-          repeat: 5,
-          setXY: { x: 100, y: 100, stepX: 130 }
-        });
-
         // Création des ennemis
         this.enemies = this.physics.add.group({
           classType: Phaser.Physics.Arcade.Sprite,
           runChildUpdate: true
         });
         for (let i = 0; i < 5; i++) {
-          const enemy = this.enemies.create(Phaser.Math.Between(50, 750), Phaser.Math.Between(50, 550), 'skeleton');
+          const enemy = this.enemies.create(Phaser.Math.Between(50, 750), Phaser.Math.Between(50, 550), 'enemy');
           enemy.setData({
             health: 50,
             strength: 15
@@ -276,11 +352,17 @@
           enemy.setVelocity(Phaser.Math.Between(-100, 100), Phaser.Math.Between(-100, 100));
         }
 
+        // Création des items
+        this.items = this.physics.add.group({
+          key: 'item',
+          repeat: 5,
+          setXY: { x: 100, y: 100, stepX: 130 }
+        });
+
         // Colliders
         this.physics.add.collider(this.hero, this.walls);
         this.physics.add.collider(this.enemies, this.walls);
         this.physics.add.collider(this.enemies, this.enemies);
-        this.physics.add.overlap(this.hero, this.npcs, this.initiateDialogue, null, this);
         this.physics.add.overlap(this.hero, this.items, this.collectItem, null, this);
         this.physics.add.overlap(this.hero, this.enemies, this.handleCombat, null, this);
 
@@ -292,9 +374,12 @@
 
         // Mini-Map
         this.minimap = document.getElementById('minimap');
+        this.miniMapCanvas = document.getElementById('mini-map-canvas');
+        this.miniMapCtx = this.miniMapCanvas.getContext('2d');
 
         // Contrôles
         this.cursors = this.input.keyboard.createCursorKeys();
+        this.keyE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
 
         // Interfaces
         this.setupUI();
@@ -321,31 +406,27 @@
         this.hero.setVelocity(0);
         if (this.cursors.left.isDown) {
           this.hero.setVelocityX(-200);
-          this.hero.anims.play('walk', true);
-          this.hero.flipX = true;
-        } else if (this.cursors.right.isDown) {
-          this.hero.setVelocityX(200);
-          this.hero.anims.play('walk', true);
-          this.hero.flipX = false;
-        } else {
-          this.hero.anims.stop();
         }
-
+        if (this.cursors.right.isDown) {
+          this.hero.setVelocityX(200);
+        }
         if (this.cursors.up.isDown) {
           this.hero.setVelocityY(-200);
-          this.hero.anims.play('walk', true);
-        } else if (this.cursors.down.isDown) {
-          this.hero.setVelocityY(200);
-          this.hero.anims.play('walk', true);
         }
+        if (this.cursors.down.isDown) {
+          this.hero.setVelocityY(200);
+        }
+
+        // Interaction avec les NPCs (si ajoutés)
+        // Exemple de logique si vous avez des NPCs
 
         // Mise à jour de la Mini-Map
         if (this.minimap.style.display === 'block') {
-          // Logique pour mettre à jour la mini-map si nécessaire
+          this.updateMiniMap();
         }
       }
 
-      initiateDialogue(player, npc) {
+      initiateDialogue() {
         this.dialogBox.style.display = 'block';
         this.dialogText.textContent = 'Bonjour, aventurier ! Accomplis nos quêtes pour gagner des récompenses.';
       }
@@ -418,6 +499,9 @@
 
       toggleMiniMap() {
         this.minimap.style.display = this.minimap.style.display === 'block' ? 'none' : 'block';
+        if (this.minimap.style.display === 'block') {
+          this.updateMiniMap();
+        }
       }
 
       updateInventoryUI() {
@@ -425,10 +509,7 @@
         inventoryList.innerHTML = '';
         for (const [key, value] of Object.entries(this.inventory)) {
           const li = document.createElement('li');
-          const img = document.createElement('img');
-          img.src = 'https://i.imgur.com/OdL0XPt.png'; // Remplacez par l'URL de votre icône d'item
-          li.appendChild(img);
-          li.appendChild(document.createTextNode(`${key}: ${value}`));
+          li.textContent = `${key}: ${value}`;
           inventoryList.appendChild(li);
         }
       }
@@ -438,10 +519,7 @@
         questList.innerHTML = '';
         this.quests.forEach(quest => {
           const li = document.createElement('li');
-          const img = document.createElement('img');
-          img.src = quest.completed ? 'https://i.imgur.com/1ZQ9QZK.png' : 'https://i.imgur.com/OdL0XPt.png'; // Icône selon l'état
-          li.appendChild(img);
-          li.appendChild(document.createTextNode(`${quest.name} - ${quest.completed ? 'Terminé' : 'En cours'}`));
+          li.textContent = `${quest.name} - ${quest.completed ? 'Terminé' : 'En cours'}`;
           questList.appendChild(li);
         });
 
@@ -449,13 +527,13 @@
         if (this.collectedItems >= 5 && !this.quests[0].completed) {
           this.quests[0].completed = true;
           this.gainExperience(100);
-          alert('Quête "Collecter des items" terminée !');
+          this.showFeedback('Quête "Collecter des items" terminée !');
         }
 
         if (this.kills >= 3 && !this.quests[1].completed) {
           this.quests[1].completed = true;
           this.gainExperience(150);
-          alert('Quête "Vaincre 3 ennemis" terminée !');
+          this.showFeedback('Quête "Vaincre 3 ennemis" terminée !');
         }
       }
 
@@ -467,27 +545,57 @@
         document.getElementById('hero-mana').textContent = this.hero.getData('mana');
 
         // Mettre à jour les barres
-        const expBar = document.getElementById('exp-bar');
+        const expBar = document.getElementById('exp-bar-inner');
         expBar.style.width = `${(this.experience / this.expNext) * 100}%`;
 
-        const healthBar = document.getElementById('health-bar');
-        const maxHealth = this.hero.getData('health');
-        healthBar.style.width = `${(this.hero.getData('health') / 200) * 100}%`; // Ajustez selon max santé
+        const healthBar = document.getElementById('health-bar-inner');
+        const maxHealth = 200; // Ajustez selon max santé
+        healthBar.style.width = `${(this.hero.getData('health') / maxHealth) * 100}%`;
 
-        const manaBar = document.getElementById('mana-bar');
-        const maxMana = this.hero.getData('mana');
-        manaBar.style.width = `${(this.hero.getData('mana') / 100) * 100}%`; // Ajustez selon max mana
+        const manaBar = document.getElementById('mana-bar-inner');
+        const maxMana = 100; // Ajustez selon max mana
+        manaBar.style.width = `${(this.hero.getData('mana') / maxMana) * 100}%`;
       }
 
       showFeedback(message) {
-        // Afficher un feedback visuel simple
-        const feedback = this.add.text(this.hero.x, this.hero.y - 50, message, { font: '16px Arial', fill: '#ff0' }).setOrigin(0.5);
-        this.tweens.add({
-          targets: feedback,
-          alpha: 0,
-          y: feedback.y - 50,
-          duration: 1000,
-          onComplete: () => feedback.destroy()
+        const feedback = document.createElement('div');
+        feedback.classList.add('feedback');
+        feedback.textContent = message;
+        feedback.style.left = `${this.hero.x - 50}px`;
+        feedback.style.top = `${this.hero.y - 50}px`;
+        document.getElementById('game-container').appendChild(feedback);
+        setTimeout(() => feedback.remove(), 1000);
+      }
+
+      updateMiniMap() {
+        // Effacer le canvas
+        this.miniMapCtx.clearRect(0, 0, this.miniMapCanvas.width, this.miniMapCanvas.height);
+
+        // Échelle pour la mini-map
+        const scale = 0.2;
+
+        // Dessiner le héros
+        this.miniMapCtx.fillStyle = '#00ff00';
+        this.miniMapCtx.fillRect(this.hero.x * scale, this.hero.y * scale, 4, 4);
+
+        // Dessiner les ennemis
+        this.enemies.getChildren().forEach(enemy => {
+          if (enemy.active) {
+            this.miniMapCtx.fillStyle = '#ff0000';
+            this.miniMapCtx.fillRect(enemy.x * scale, enemy.y * scale, 4, 4);
+          }
+        });
+
+        // Dessiner les murs
+        this.walls.getChildren().forEach(wall => {
+          this.miniMapCtx.fillStyle = '#888888';
+          this.miniMapCtx.fillRect(wall.x * scale, wall.y * scale, 4, 4);
+        });
+
+        // Dessiner les items
+        this.items.getChildren().forEach(item => {
+          this.miniMapCtx.fillStyle = '#ffff00';
+          this.miniMapCtx.fillRect(item.x * scale, item.y * scale, 2, 2);
         });
       }
     }
