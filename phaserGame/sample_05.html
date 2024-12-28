@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phaser Game with Inventory Menu</title>
+  <script src="https://cdn.jsdelivr.net/npm/phaser@3/dist/phaser.min.js"></script>
+</head>
+<body>
+  <script>
+    const config = {
+      type: Phaser.AUTO,
+      width: 800,
+      height: 600,
+      physics: {
+        default: 'arcade',
+        arcade: {
+          gravity: { y: 0 },
+          debug: true
+        }
+      },
+      scene: {
+        preload: preload,
+        create: create,
+        update: update
+      }
+    };
+
+    const game = new Phaser.Game(config);
+
+    let hero;
+    let enemies;
+    let walls;
+    let cursors;
+    let sanctuary;
+    let inventory = {
+      healthPotion: 2
+    };
+    let inventoryMenu;
+    let inventoryVisible = false;
+
+    class Character extends Phaser.Physics.Arcade.Sprite {
+      constructor(scene, x, y, texture, attributes) {
+        super(scene, x, y, texture);
+        this.attributes = attributes;
+        scene.add.existing(this);
+        scene.physics.add.existing(this);
+        this.setCollideWorldBounds(true);
+      }
+
+      useHealthPotion() {
+        if (inventory.healthPotion > 0 && this.attributes.health < 100) {
+          this.attributes.health = Math.min(this.attributes.health + 30, 100);
+          inventory.healthPotion--;
+          console.log('Used health potion. Remaining:', inventory.healthPotion);
+        }
+      }
+    }
+
+    function preload() {
+      this.load.image('hero', 'https://via.placeholder.com/32x32.png?text=H');
+      this.load.image('skeleton', 'https://via.placeholder.com/32x32.png?text=S');
+      this.load.image('wall', 'https://via.placeholder.com/32x32.png?text=W');
+      this.load.image('sanctuary', 'https://via.placeholder.com/64x64.png?text=Sanc');
+    }
+
+    function create() {
+      // Add walls
+      walls = this.physics.add.staticGroup();
+      walls.create(400, 300, 'wall');
+      walls.create(200, 400, 'wall');
+
+      // Create sanctuary
+      sanctuary = this.physics.add.staticSprite(600, 200, 'sanctuary');
+      sanctuary.accessSide = 'left'; // Only accessible from the left
+
+      // Create the hero
+      hero = new Character(this, 100, 100, 'hero', {
+        health: 100,
+        mana: 50,
+        defense: 20,
+        strength: 30
+      });
+
+      // Create enemies
+      enemies = this.physics.add.group({
+        classType: Character,
+        runChildUpdate: true
+      });
+
+      for (let i = 0; i < 3; i++) {
+        const enemy = new Character(this, 400 + i * 50, 200, 'skeleton', {
+          health: 50,
+          strength: 15
+        });
+        enemies.add(enemy);
+      }
+
+      // Colliders
+      this.physics.add.collider(hero, walls);
+      this.physics.add.collider(enemies, walls);
+      this.physics.add.collider(hero, enemies);
+      this.physics.add.overlap(hero, sanctuary, handleSanctuaryEntry, null, this);
+
+      // Keyboard input
+      cursors = this.input.keyboard.createCursorKeys();
+
+      // Add inventory usage
+      this.input.keyboard.on('keydown-H', () => {
+        hero.useHealthPotion();
+      });
+
+      // Toggle inventory menu
+      this.input.keyboard.on('keydown-I', () => {
+        toggleInventoryMenu();
+      });
+
+      // Create inventory menu
+      inventoryMenu = this.add.text(10, 10, '', {
+        fontSize: '16px',
+        fill: '#ffffff',
+        backgroundColor: '#000000',
+        padding: { x: 10, y: 5 },
+        wordWrap: { width: 200 }
+      });
+      inventoryMenu.setVisible(false);
+    }
+
+    function update() {
+      // Hero movement
+      hero.setVelocity(0);
+      if (cursors.left.isDown) hero.setVelocityX(-200);
+      if (cursors.right.isDown) hero.setVelocityX(200);
+      if (cursors.up.isDown) hero.setVelocityY(-200);
+      if (cursors.down.isDown) hero.setVelocityY(200);
+
+      // Enemy AI
+      Phaser.Actions.Call(enemies.getChildren(), (enemy) => {
+        const distance = Phaser.Math.Distance.Between(hero.x, hero.y, enemy.x, enemy.y);
+
+        if (distance < 200) {
+          this.physics.moveToObject(enemy, hero, 100);
+        } else {
+          enemy.setVelocity(
+            Phaser.Math.Between(-100, 100),
+            Phaser.Math.Between(-100, 100)
+          );
+        }
+      });
+    }
+
+    function handleSanctuaryEntry(hero, sanctuary) {
+      // Check if hero is entering from the correct side
+      if (hero.x < sanctuary.x - sanctuary.width / 2) {
+        hero.attributes.health = 100;
+        hero.attributes.mana = 50;
+        console.log('Sanctuary restored health and mana.');
+      } else {
+        console.log('You must enter from the left side!');
+      }
+    }
+
+    function toggleInventoryMenu() {
+      inventoryVisible = !inventoryVisible;
+      if (inventoryVisible) {
+        const inventoryText = `Inventory:\n- Health Potions: ${inventory.healthPotion}`;
+        inventoryMenu.setText(inventoryText);
+        inventoryMenu.setVisible(true);
+      } else {
+        inventoryMenu.setVisible(false);
+      }
+    }
+  </script>
+</body>
+</html>
