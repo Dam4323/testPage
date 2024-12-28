@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phaser RPG Tools</title>
+  <script src="https://cdn.jsdelivr.net/npm/phaser@3/dist/phaser.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #1e1e1e;
+      color: #ffffff;
+    }
+    #game-container {
+      width: 800px;
+      height: 600px;
+      margin: 20px auto;
+      border: 5px solid #444;
+      position: relative;
+    }
+    #ui-container {
+      width: 800px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      background: #333;
+    }
+    #ui-container button {
+      padding: 10px 20px;
+      background-color: #555;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+    #ui-container button:hover {
+      background-color: #777;
+    }
+  </style>
+</head>
+<body>
+  <div id="game-container"></div>
+  <div id="ui-container">
+    <button id="toggle-inventory">Toggle Inventory</button>
+    <button id="quest-status">Check Quest</button>
+    <button id="show-map">Show/Hide Mini-Map</button>
+  </div>
+
+  <script>
+    const config = {
+      type: Phaser.AUTO,
+      width: 800,
+      height: 600,
+      parent: 'game-container',
+      physics: {
+        default: 'arcade',
+        arcade: { gravity: { y: 0 }, debug: false }
+      },
+      scene: { preload, create, update }
+    };
+
+    const game = new Phaser.Game(config);
+
+    let player, cursors, npc, items, dialogBox, dialogText, inDialog = false;
+    let inventoryVisible = false;
+    let questComplete = false;
+    let collected = 0;
+    let miniMapVisible = false;
+
+    const inventory = { healthPotion: 3 };
+
+    function preload() {
+      this.load.image('player', '../assets/heroes_monster/individual/0107 - Human Paladin - Run 4.png');
+      this.load.image('npc', '../assets/heroes_monster/individual/0177 - Dwarf Priest - Run 4.png');
+      this.load.image('item', '../assets/decor/item.png');
+      this.load.image('map', '../assets/decor/map.png');
+    }
+
+    function create() {
+      player = this.physics.add.sprite(400, 300, 'player').setCollideWorldBounds(true);
+      npc = this.physics.add.staticSprite(500, 300, 'npc');
+      this.physics.add.overlap(player, npc, initiateDialogue, null, this);
+
+      items = this.physics.add.group({
+        key: 'item',
+        repeat: 4,
+        setXY: { x: 100, y: 100, stepX: 150 }
+      });
+      this.physics.add.overlap(player, items, collectItem, null, this);
+
+      dialogBox = this.add.rectangle(400, 550, 400, 100, 0x000000, 0.8).setVisible(false);
+      dialogText = this.add.text(220, 520, '', { color: '#fff', fontSize: '16px' }).setVisible(false);
+
+      miniMap = this.add.image(700, 100, 'map').setScrollFactor(0).setScale(0.3).setVisible(false);
+
+      cursors = this.input.keyboard.createCursorKeys();
+
+      document.getElementById('toggle-inventory').addEventListener('click', () => toggleInventory());
+      document.getElementById('quest-status').addEventListener('click', () => checkQuestStatus());
+      document.getElementById('show-map').addEventListener('click', () => toggleMiniMap());
+    }
+
+    function update() {
+      if (inDialog) return;
+
+      player.setVelocity(0);
+      if (cursors.left.isDown) player.setVelocityX(-200);
+      if (cursors.right.isDown) player.setVelocityX(200);
+      if (cursors.up.isDown) player.setVelocityY(-200);
+      if (cursors.down.isDown) player.setVelocityY(200);
+    }
+
+    function initiateDialogue() {
+      if (!inDialog) {
+        inDialog = true;
+        dialogBox.setVisible(true);
+        dialogText.setText('Hello traveler! Collect all items to complete your quest.').setVisible(true);
+
+        this.input.keyboard.once('keydown-SPACE', () => {
+          dialogBox.setVisible(false);
+          dialogText.setVisible(false);
+          inDialog = false;
+        });
+      }
+    }
+
+    function collectItem(player, item) {
+      item.destroy();
+      collected++;
+      if (collected === 5) questComplete = true;
+    }
+
+    function toggleInventory() {
+      inventoryVisible = !inventoryVisible;
+      alert(`Inventory:\n- Health Potions: ${inventory.healthPotion}`);
+    }
+
+    function checkQuestStatus() {
+      alert(questComplete ? 'Quest Complete!' : 'Quest In Progress: Collect all items!');
+    }
+
+    function toggleMiniMap() {
+      miniMapVisible = !miniMapVisible;
+      miniMap.setVisible(miniMapVisible);
+    }
+  </script>
+</body>
+</html>
