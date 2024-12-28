@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phaser RPG Avancé</title>
+  <script src="https://cdn.jsdelivr.net/npm/phaser@3/dist/phaser.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #1e1e1e;
+      color: #ffffff;
+    }
+    #game-container {
+      width: 800px;
+      height: 600px;
+      margin: 20px auto;
+      border: 5px solid #444;
+      position: relative;
+    }
+    #ui-container {
+      width: 800px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      background: #333;
+    }
+    #ui-container div {
+      display: flex;
+      align-items: center;
+    }
+    #ui-container button {
+      padding: 10px 20px;
+      background-color: #555;
+      border: none;
+      color: white;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+    #ui-container button:hover {
+      background-color: #777;
+    }
+    #inventory, #quest-log, #stats {
+      position: absolute;
+      top: 50px;
+      right: 20px;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 15px;
+      border: 2px solid #555;
+      border-radius: 5px;
+      display: none;
+      width: 200px;
+    }
+    #inventory.visible, #quest-log.visible, #stats.visible {
+      display: block;
+    }
+    #inventory h2, #quest-log h2, #stats h2 {
+      margin-top: 0;
+    }
+    .bar {
+      width: 100%;
+      background: #555;
+      border-radius: 5px;
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
+    .bar-inner {
+      height: 20px;
+      background: #0f0;
+      width: 0%;
+    }
+  </style>
+</head>
+<body>
+  <div id="game-container"></div>
+  <div id="ui-container">
+    <div>
+      <button id="toggle-inventory">Inventaire</button>
+      <button id="toggle-quests">Quêtes</button>
+      <button id="toggle-stats">Stats</button>
+    </div>
+    <div>
+      <button id="show-map">Mini-Map</button>
+    </div>
+  </div>
+
+  <!-- Inventaire -->
+  <div id="inventory">
+    <h2>Inventaire</h2>
+    <ul id="inventory-list">
+      <!-- Items dynamiques -->
+    </ul>
+  </div>
+
+  <!-- Journal de Quêtes -->
+  <div id="quest-log">
+    <h2>Quêtes</h2>
+    <ul id="quest-list">
+      <!-- Quêtes dynamiques -->
+    </ul>
+  </div>
+
+  <!-- Stats du Héros -->
+  <div id="stats">
+    <h2>Stats</h2>
+    <p>Niveau: <span id="hero-level">1</span></p>
+    <p>Expérience: <span id="hero-exp">0</span> / <span id="hero-exp-next">100</span></p>
+    <div class="bar">
+      <div class="bar-inner" id="exp-bar"></div>
+    </div>
+    <p>Santé: <span id="hero-health">100</span></p>
+    <p>Mana: <span id="hero-mana">50</span></p>
+  </div>
+
+  <!-- Mini-Map -->
+  <div id="minimap" style="position: absolute; bottom: 10px; right: 10px; width: 150px; height: 150px; background: rgba(0,0,0,0.5); display: none;">
+    <!-- Mini-Map dynamique -->
+  </div>
+
+  <script>
+    class RPGGame extends Phaser.Scene {
+      constructor() {
+        super({ key: 'RPGGame' });
+      }
+
+      preload() {
+        // Chargement des assets
+        this.load.image('hero', 'https://i.imgur.com/7k12EPD.png'); // Remplacez par vos assets
+        this.load.image('npc', 'https://i.imgur.com/4AiXzf8.png');
+        this.load.image('item', 'https://i.imgur.com/OdL0XPt.png');
+        this.load.image('map', 'https://i.imgur.com/1ZQ9QZK.png');
+        this.load.image('wall', 'https://i.imgur.com/8Iu0R2x.png');
+        this.load.image('skeleton', 'https://i.imgur.com/7b8GZ5C.png');
+      }
+
+      create() {
+        // Variables de jeu
+        this.collectedItems = 0;
+        this.questComplete = false;
+        this.experience = 0;
+        this.level = 1;
+        this.expNext = 100;
+        this.inventory = { healthPotion: 3, manaPotion: 2 };
+        this.quests = [
+          { id: 1, name: 'Collecter des items', completed: false },
+          { id: 2, name: 'Vaincre 3 ennemis', completed: false }
+        ];
+        this.kills = 0;
+
+        // Génération aléatoire de niveaux (simplifié)
+        this.walls = this.physics.add.staticGroup();
+        for (let i = 0; i < 10; i++) {
+          const x = Phaser.Math.Between(50, 750);
+          const y = Phaser.Math.Between(50, 550);
+          this.walls.create(x, y, 'wall');
+        }
+
+        // Création du héros
+        this.hero = this.physics.add.sprite(400, 300, 'hero').setCollideWorldBounds(true);
+        this.hero.setData({
+          health: 100,
+          mana: 50,
+          defense: 20,
+          strength: 30
+        });
+
+        // Création des NPCs
+        this.npcs = this.physics.add.staticGroup();
+        this.npcs.create(600, 300, 'npc');
+
+        // Création des items
+        this.items = this.physics.add.group({
+          key: 'item',
+          repeat: 5,
+          setXY: { x: 100, y: 100, stepX: 130 }
+        });
+
+        // Création des ennemis
+        this.enemies = this.physics.add.group({
+          classType: Phaser.Physics.Arcade.Sprite,
+          runChildUpdate: true
+        });
+        for (let i = 0; i < 5; i++) {
+          const enemy = this.enemies.create(Phaser.Math.Between(50, 750), Phaser.Math.Between(50, 550), 'skeleton');
+          enemy.setData({
+            health: 50,
+            strength: 15
+          });
+          enemy.setCollideWorldBounds(true);
+          enemy.setBounce(1);
+          enemy.setVelocity(Phaser.Math.Between(-100, 100), Phaser.Math.Between(-100, 100));
+        }
+
+        // Colliders
+        this.physics.add.collider(this.hero, this.walls);
+        this.physics.add.collider(this.enemies, this.walls);
+        this.physics.add.collider(this.enemies, this.enemies);
+        this.physics.add.overlap(this.hero, this.npcs, this.initiateDialogue, null, this);
+        this.physics.add.overlap(this.hero, this.items, this.collectItem, null, this);
+        this.physics.add.overlap(this.hero, this.enemies, this.handleCombat, null, this);
+
+        // Dialogues
+        this.dialogBox = this.add.rectangle(400, 500, 600, 100, 0x000000, 0.8).setVisible(false);
+        this.dialogText = this.add.text(200, 450, '', { color: '#fff', fontSize: '16px' }).setVisible(false);
+
+        // Mini-Map
+        this.minimap = this.add.image(700, 500, 'map').setScrollFactor(0).setScale(0.2).setVisible(false);
+
+        // Contrôles
+        this.cursors = this.input.keyboard.createCursorKeys();
+
+        // Interfaces
+        this.setupUI();
+
+        // Caméra
+        this.cameras.main.startFollow(this.hero);
+      }
+
+      setupUI() {
+        // Boutons
+        document.getElementById('toggle-inventory').addEventListener('click', () => this.toggleInventory());
+        document.getElementById('toggle-quests').addEventListener('click', () => this.toggleQuests());
+        document.getElementById('toggle-stats').addEventListener('click', () => this.toggleStats());
+        document.getElementById('show-map').addEventListener('click', () => this.toggleMiniMap());
+
+        // Initialisation des UI
+        this.updateStatsUI();
+        this.updateInventoryUI();
+        this.updateQuestUI();
+      }
+
+      update() {
+        // Déplacement du héros
+        this.hero.setVelocity(0);
+        if (this.cursors.left.isDown) this.hero.setVelocityX(-200);
+        if (this.cursors.right.isDown) this.hero.setVelocityX(200);
+        if (this.cursors.up.isDown) this.hero.setVelocityY(-200);
+        if (this.cursors.down.isDown) this.hero.setVelocityY(200);
+
+        // Mise à jour de la Mini-Map
+        if (this.minimap.visible) {
+          this.minimap.setPosition(this.cameras.main.scrollX + 700, this.cameras.main.scrollY + 500);
+        }
+      }
+
+      initiateDialogue(player, npc) {
+        this.dialogBox.setVisible(true);
+        this.dialogText.setText('Bonjour, aventurier ! Accomplis nos quêtes pour gagner des récompenses.').setVisible(true);
+
+        // Attendre la touche E pour fermer le dialogue
+        this.input.keyboard.once('keydown-E', () => {
+          this.dialogBox.setVisible(false);
+          this.dialogText.setVisible(false);
+        });
+      }
+
+      collectItem(player, item) {
+        item.destroy();
+        this.inventory.healthPotion = (this.inventory.healthPotion || 0) + 1;
+        this.updateInventoryUI();
+        this.gainExperience(20);
+      }
+
+      handleCombat(player, enemy) {
+        if (enemy.active) {
+          // Simuler un combat simple
+          enemy.setActive(false).setVisible(false);
+          this.gainsFromCombat(enemy);
+          this.kills += 1;
+          this.updateQuestUI();
+        }
+      }
+
+      gainsFromCombat(enemy) {
+        // Laisser tomber un item aléatoire
+        if (Phaser.Math.Between(0, 1)) {
+          const item = this.items.create(enemy.x, enemy.y, 'item');
+          this.physics.add.overlap(this.hero, this.items, this.collectItem, null, this);
+        }
+        this.gainExperience(50);
+      }
+
+      gainExperience(amount) {
+        this.experience += amount;
+        if (this.experience >= this.expNext) {
+          this.levelUp();
+        }
+        this.updateStatsUI();
+      }
+
+      levelUp() {
+        this.level += 1;
+        this.experience -= this.expNext;
+        this.expNext = Math.floor(this.expNext * 1.5);
+        this.hero.setData('health', this.hero.getData('health') + 20);
+        this.hero.setData('mana', this.hero.getData('mana') + 10);
+        this.hero.setData('strength', this.hero.getData('strength') + 5);
+        this.updateStatsUI();
+      }
+
+      toggleInventory() {
+        const inventoryDiv = document.getElementById('inventory');
+        inventoryDiv.classList.toggle('visible');
+      }
+
+      toggleQuests() {
+        const questDiv = document.getElementById('quest-log');
+        questDiv.classList.toggle('visible');
+      }
+
+      toggleStats() {
+        const statsDiv = document.getElementById('stats');
+        statsDiv.classList.toggle('visible');
+      }
+
+      toggleMiniMap() {
+        this.minimap.setVisible(!this.minimap.visible);
+      }
+
+      updateInventoryUI() {
+        const inventoryList = document.getElementById('inventory-list');
+        inventoryList.innerHTML = '';
+        for (const [key, value] of Object.entries(this.inventory)) {
+          const li = document.createElement('li');
+          li.textContent = `${key}: ${value}`;
+          inventoryList.appendChild(li);
+        }
+      }
+
+      updateQuestUI() {
+        const questList = document.getElementById('quest-list');
+        questList.innerHTML = '';
+        this.quests.forEach(quest => {
+          const li = document.createElement('li');
+          li.textContent = `${quest.name} - ${quest.completed ? 'Terminé' : 'En cours'}`;
+          questList.appendChild(li);
+        });
+
+        // Vérifier les quêtes
+        if (this.collectedItems >= 5 && !this.quests[0].completed) {
+          this.quests[0].completed = true;
+          this.gainExperience(100);
+          alert('Quête "Collecter des items" terminée !');
+        }
+
+        if (this.kills >= 3 && !this.quests[1].completed) {
+          this.quests[1].completed = true;
+          this.gainExperience(150);
+          alert('Quête "Vaincre 3 ennemis" terminée !');
+        }
+      }
+
+      updateStatsUI() {
+        document.getElementById('hero-level').textContent = this.level;
+        document.getElementById('hero-exp').textContent = this.experience;
+        document.getElementById('hero-exp-next').textContent = this.expNext;
+        document.getElementById('hero-health').textContent = this.hero.getData('health');
+        document.getElementById('hero-mana').textContent = this.hero.getData('mana');
+        document.getElementById('exp-bar').style.width = `${(this.experience / this.expNext) * 100}%`;
+      }
+    }
+
+    const config = {
+      type: Phaser.AUTO,
+      width: 800,
+      height: 600,
+      parent: 'game-container',
+      physics: {
+        default: 'arcade',
+        arcade: { gravity: { y: 0 }, debug: false }
+      },
+      scene: [RPGGame]
+    };
+
+    const game = new Phaser.Game(config);
+  </script>
+</body>
+</html>
